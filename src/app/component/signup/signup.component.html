@@ -1,0 +1,39 @@
+<div class="container">
+  <form class="form-signin" (submit)="signupSub()" #subForm="ngForm">
+    <h2 class="form-signin-heading">注册界面</h2>
+    <label for="inputEmail" class="sr-only">邮箱地址</label>
+    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required
+           name="email" [(ngModel)]="signupForm.email" #email="ngModel" email="true"
+    >
+    <!--<div [hidden]="email.valid || email.pristine"-->
+    <!--class="alert alert-danger">-->
+    <!--邮箱必须正确填写-->
+    <!--</div>-->
+
+    <!-- 增加多个验证-->
+
+    <div *ngIf="email.invalid && (email.dirty || email.touched)"
+         class="alert alert-danger">
+      <!-- 访问属性之前检测对象是否为空-->
+      <div *ngIf="email?.errors.required">
+        邮箱必填
+      </div>
+      <div *ngIf="email?.errors.email">
+        无效的邮箱
+      </div>
+    </div>
+    <div *ngIf="email_msg" class="alert alert-danger">
+      {{email_msg}}
+    </div>
+    <label for="inputPassword" class="sr-only">邮箱密码</label>
+    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required
+           name="password" [(ngModel)]="signupForm.password" #password="ngModel"
+    >
+    <div [hidden]="password.valid || password.pristine"
+         class="alert alert-danger">
+      密码必须填写
+    </div>
+    <button [disabled]="!subForm.form.valid" class="btn btn-lg btn-primary btn-block" type="submit">注册</button>
+  </form>
+  <p class="info"><a routerLink='/signin'>已经有账号:请登录</a></p>
+</div>

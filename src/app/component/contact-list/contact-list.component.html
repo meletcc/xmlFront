@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="form-group">
+    <a>执行插件</a>
+  </div>
+  <div class="form-group">
+    <label>插件说明</label>
+    <input type="text" class="form-control" [(ngModel)]="opmEntity.description" name="description" placeholder="插件说明">
+  </div>
+  <div class="form-group">
+    <label>插件代码</label>
+    <input type="text" class="form-control" [(ngModel)]="opmEntity.body" name="body" (blur)="acquireSql()"
+           placeholder="自定义sql">
+  </div>
+  <div class="form-group">
+    <input type="checkbox" (click)="backUp()" id="isBackUp">
+    <label style="margin-left: 10px;" for="isBackUp">是否备份</label>
+  </div>
+  <div *ngIf="isBackup">
+    <div class="form-group">
+      <label>备份</label>
+      <input type="text" class="form-control" [(ngModel)]="opmEntity.back" name="back" placeholder="备份">
+    </div>
+  </div>
+  <div *ngIf="parameters.length >0">
+    <div class="row" style="margin-top: 15px" *ngFor="let parameter of parameters">
+      <div class="col-md-3">
+        <label class="label-style">参数说明:</label>
+        <input type="text" [(ngModel)]="parameter.description" name="pDescription" placeholder="请输入参数类型">
+      </div>
+      <div class="col-md-3">
+        <label class="label-style">参数类型:</label>
+        <input type="text" [(ngModel)]="parameter.type" name="pType" placeholder="请输入参数类型">
+      </div>
+      <div class="col-md-6">
+        <label class="label-style">提示:</label>
+        <input type="text" [(ngModel)]="parameter.tips" name="pTips" placeholder="请输入提示">
+      </div>
+    </div>
+  </div>
+  <input type="button" class="btn btn-default" style="margin-top: 10px;" value="保存插件" (click)="savePlugIn()">
+</div>
+

@@ -1,0 +1,36 @@
+<!--<div class="loginImage">-->
+<div class="container">
+  <form class="form-signin" (submit)="signinSub()" #subForm="ngForm">
+    <h2 class="form-signin-heading">智慧物业数据运维平台</h2>
+
+    <label for="inputName" class="sr-only">用户名</label>
+    <input type="text" id="inputName" class="form-control" placeholder="帐号" required name="name"
+           [(ngModel)]="signinForm.name" #name="ngModel">
+    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+      <!-- 访问属性之前检测对象是否为空-->
+      <div *ngIf="name?.errors.required">
+        帐号必须填写
+      </div>
+    </div>
+
+    <label for="inputPassword" class="sr-only">密码</label>
+    <input type="password" id="inputPassword" class="form-control" placeholder="密码" required name="password"
+           [(ngModel)]="signinForm.pwd" #password="ngModel">
+    <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
+      密码必须填写
+    </div>
+    <div *ngIf="error_msg" class="alert alert-danger">
+      {{error_msg}}
+    </div>
+    <button [disabled]="!subForm.form.valid" class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+  </form>
+
+  <div class="login_bottom_box">
+    <div class="login_bottom">
+      <p>技术支持：成都鹏业软件股份有限公司 &nbsp;&nbsp;24小时服务电话：400-888-5131 &nbsp;&nbsp;网址：fc.pengye.com.cn</p>
+    </div>
+  </div>
+  <!--<p class="info"><a routerLink='/signup'>注册</a></p>-->
+</div>
+<!--</div>-->
+
