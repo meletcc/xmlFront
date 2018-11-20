@@ -1,12 +1,54 @@
+<h2 xmlns="">日志记录</h2>
+<hr>
+
+<div class="row">
+  <div class='col-sm-3'>
+    <div class="form-group">
+      <label>选择开始时间：</label>
+      <!--指定 date标记-->
+      <div class='input-group date' id='datetimepicker1'>
+        <input type='text' class="form-control"/>
+        <span class="input-group-addon">
+          <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class='col-sm-3'>
+    <div class="form-group">
+      <label>选择结束时间：</label>
+      <!--指定 date标记-->
+      <div class='input-group date' id='datetimepicker2'>
+        <input type='text' class="form-control"/>
+        <span class="input-group-addon">
+          <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
 <table class="table table-bordered">
   <tr>
-    <td>1</td>
-    <td>2</td>
-    <td>3</td>
+    <th>编号</th>
+    <th>sql</th>
+    <th>说明</th>
+    <th>时间</th>
+    <th>用户编号</th>
+    <th>备份主体</th>
+    <th>操作</th>
   </tr>
-  <tr>
-    <td>1</td>
-    <td>2</td>
-    <td>3</td>
+
+  <tr *ngFor="let item of records">
+    <td>{{item.recordId}}</td>
+    <td>{{item.recordBody}}</td>
+    <td>{{item.recordDescription}}</td>
+    <td>{{item.recordDate}}</td>
+    <td>{{item.userId}}</td>
+    <td>{{item.recordBackup}}</td>
   </tr>
 </table>
+<app-paging [page]="page" (getdata)="getdata()" [countArr]="[1,2,3,4]"></app-paging>
+
+

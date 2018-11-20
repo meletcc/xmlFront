@@ -18,6 +18,8 @@ import {GlobalInterceptor} from './global.interceptor';
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 import {LoginService} from './service/loginService/login.service';
 import {LogComponent} from './component/log/log.component';
+import { PagingComponent } from './component/paging/paging.component';
+import { FullBackComponent } from './component/full-back/full-back.component';
 
 // 可以写多个拦截器
 export const httpInterceptorProviders = [
@@ -33,7 +35,9 @@ export const httpInterceptorProviders = [
     SignupComponent,
     ContactListComponent,
     LayoutComponent,
-    LogComponent
+    LogComponent,
+    PagingComponent,
+    FullBackComponent
   ],
   imports: [
     BrowserModule,

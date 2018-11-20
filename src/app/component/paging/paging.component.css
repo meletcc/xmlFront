@@ -1,0 +1,139 @@
+.paging {
+  box-sizing: border-box;
+  border: 2px solid #ddd;
+  height: 30px;
+  line-height: 24px;
+  padding: 3px 10px;
+  display: flex;
+  justify-content: space-between;
+  background: #f4f4f4;
+  border-radius: .2em;
+  font-size: 12px;
+}
+
+.paging > div {
+  cursor: pointer;
+  flex: 1;
+  display: flex;
+}
+
+.paging > div .pageimg {
+  width: 18px;
+  height: 24px;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.paging > div .pageimg img {
+  position: absolute;
+  top: 3px;
+  width: 100%;
+}
+
+.paging > div.header > div.line-btw {
+  height: 100%;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #fff;
+  margin: 0 5px;
+}
+
+.paging > div.header > div .pagination-first {
+  margin-left: 4px;
+  display: inline-block;
+  width: 16px;
+  height: 100%;
+  background: url(../../../assets/imgs/pagination_icons.png) no-repeat 0 center;
+}
+
+.paging > div.header > div .pagination-prev {
+  margin-left: 4px;
+  display: inline-block;
+  width: 16px;
+  height: 100%;
+  background: url(../../../assets/imgs/pagination_icons.png) no-repeat -16px center;
+}
+
+.paging > div.header > div .pagination-next {
+  margin-left: 4px;
+  display: inline-block;
+  width: 16px;
+  height: 100%;
+  background: url(../../../assets/imgs/pagination_icons.png) no-repeat -32px center;
+}
+
+.paging > div.header > div .pagination-last {
+  margin-left: 4px;
+  display: inline-block;
+  width: 16px;
+  height: 100%;
+  background: url(../../../assets/imgs/pagination_icons.png) no-repeat -48px center;
+}
+
+.paging > div.header > div .pagination-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  z-index: 1;
+  background: rgba(199, 199, 199, 0.5);
+}
+
+.paging > div.header > div .pagination-bg:hover {
+  border: 1px solid #ccc;
+}
+
+.paging > div.header > div.link {
+  width: 24px;
+  text-decoration: underline;
+  position: relative;
+}
+
+.paging > div.header > div.pages {
+  position: relative;
+  margin: 0 5px;
+}
+
+.paging > div.header > div.pages input {
+  position: absolute;
+  top: 1px;
+  width: 34px;
+  height: 20px;
+  border: 1px solid #CBD5E0;
+}
+
+.paging > div.header > div.pages span {
+  margin-left: 36px;
+}
+
+.paging > div.header select {
+  width: 50px;
+  height: 22px;
+  border-radius: .3em;
+}
+
+.paging > div.body > div {
+  margin: 0 4px;
+  font-family: Verdana;
+}
+
+.paging > div.body .red {
+  color: red;
+}
+
+.paging > div.foot {
+  justify-content: flex-end;
+}
+
+.paging > div.foot > div {
+  margin: 0 3px;
+}
+
+.paging > div.foot select {
+  width: 50px;
+}
+
+.paging > div.foot .go {
+  background: #dddddd;
+  border: 1px solid #999;
+  padding: 0 3px;
+}

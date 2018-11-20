@@ -12,6 +12,7 @@ import {ContactListComponent} from './component/contact-list/contact-list.compon
 import {AuthGuard} from './auth.guard';
 // 日志模块
 import {LogComponent} from './component/log/log.component';
+import {FullBackComponent} from './component/full-back/full-back.component';
 
 // 1.路由模块初始化
 // 2.配置路由表 导航到某个组件
@@ -22,7 +23,7 @@ const routers: Routes = [
   // 默认地址
   {
     path: '',
-    redirectTo: '/contactList', // 根路径跳转 自动先渲染layout 然后再渲染layout 下面的路由出口
+    redirectTo: '/contactList', // 根路径跳转 自动先渲染 layout 然后再渲染layout 下面的路由出口
     pathMatch: 'full' // 必须完全匹配路径的时候才做重定向
   },
   {
@@ -49,13 +50,24 @@ const routers: Routes = [
     ]
   },
   {
+    path: 'fullback',
+    component: LayoutComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: '',
+        component: FullBackComponent
+      }
+    ]
+  },
+  {
     path: 'signin',
     component: SigninComponent
   },
   {
     path: 'signup',
     component: SignupComponent
-  },
+  }
 ];
 
 @NgModule({

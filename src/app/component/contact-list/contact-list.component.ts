@@ -57,12 +57,6 @@ export class ContactListComponent implements OnInit {
     //to do service
     this.opmEntity.parameterStr = JSON.stringify(this.parameters);
     console.log(JSON.stringify(this.parameters));
-    /* this.http.post<any>('/make', this.opmEntity).toPromise().then(
-       ada =>{
-         window.location.href = "192.168.5.208:3000/make"+ada;
-         console.log(ada);
-       }
-     )}*/
     this.http.post('/make', this.opmEntity, {responseType: 'blob'}).subscribe(data => {
       const link = document.createElement('a');
       const blob = new Blob([data], {type: 'application/text'});

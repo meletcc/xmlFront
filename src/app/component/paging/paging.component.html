@@ -1,0 +1,39 @@
+<div class="paging">
+  <div class="header">
+    <select name="" id="" [(ngModel)]="slectValue" ng-options (ngModelChange)="selChange()">
+      <option [value]="arrFirst" selected>{{arrFirst}}</option>
+      <option *ngFor="let item of countArr"  [value]='item'>{{item}}</option>
+    </select>
+    <div class="line-btw"></div>
+    <div class="link" (click)="changepage(1)">
+      <span class="pagination-bg">
+        <span class="pagination-first"></span>
+      </span>
+    </div>
+    <div class="link" (click)="changepage(2)">
+      <span class="pagination-bg">
+        <span class="pagination-prev"></span>
+      </span>
+    </div>
+    <div class="pages">第
+      <input type="text" [(ngModel)]="page.currentPage">
+      <span>共{{page.pageCount}}页</span>
+    </div>
+    <div class="link" (click)="changepage(3)">
+      <span class="pagination-bg">
+        <span class="pagination-next"></span>
+      </span>
+    </div>
+    <div class="link" (click)="changepage(4)">
+      <span class="pagination-bg">
+        <span class="pagination-last"></span>
+      </span>
+    </div>
+    <div class="line-btw"></div>
+  </div>
+
+  <div class="foot">
+    <div>显示{{page.startNum}}到{{page.getCurrtNum}}</div>
+    <div>共{{page.totleNum}}条记录</div>
+  </div>
+</div>
