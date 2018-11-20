@@ -14,10 +14,12 @@ export class GetLogService {
     this.baseurl = '/record';
   }
 
-  getLog(pageNum: number, pageSize: number):any {
+  getLog(pageNum: number, pageSize: number, startDate: string, endDate: string): any {
     const params = new HttpParams()
       .set('pageNum', pageNum.toString())
-      .set('pageSize', pageSize.toString());
+      .set('pageSize', pageSize.toString())
+      .set('startDate', startDate.toString())
+      .set('endDate', endDate.toString());
     return this.http.post(this.baseurl + '/list', params);
   }
 }

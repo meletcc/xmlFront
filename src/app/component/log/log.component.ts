@@ -11,6 +11,8 @@ export class LogComponent implements OnInit {
 
   page: Page;
   records: Array<any>;
+  startDate: string;
+  endDate: string;
 
 
   constructor(
@@ -24,13 +26,16 @@ export class LogComponent implements OnInit {
   }
 
   getdata() {
-    this.getlog.getLog(this.page.currentPage, this.page.currtNum).subscribe(res => {
+    this.getlog.getLog(this.page.currentPage, this.page.currtNum, this.startDate, this.endDate).subscribe(res => {
       this.records = res.rows;
       this.page.totleNum = res.total;
       this.page.pageCount = Math.ceil(res['total'] / this.page.currtNum);
       this.page.startNum = ((this.page.currentPage - 1) * this.page.currtNum) + 1;
       this.page.getCurrtNum = this.page.startNum - 1 + res.rows.length;
     });
+  }
+  select() {
+    this.getdata();
   }
 
 }
