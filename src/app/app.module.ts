@@ -27,6 +27,7 @@ import {FullbackServiceService} from './service/fullbackService/fullback-service
 import {NgZorroAntdModule, NZ_I18N, zh_CN} from 'ng-zorro-antd';
 import zh from '@angular/common/locales/zh';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { PluginManagerComponent } from './component/plugin-manager/plugin-manager.component';
 
 registerLocaleData(zh);
 
@@ -48,7 +49,8 @@ export const httpInterceptorProviders = [
     LogComponent,
     PagingComponent,
     FullBackComponent,
-    UploadPlugComponent
+    UploadPlugComponent,
+    PluginManagerComponent
   ],
   imports: [
     BrowserModule,

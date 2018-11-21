@@ -108,24 +108,27 @@ export class ContactListComponent implements OnInit {
   savePlugIn(): void {
     //to do service
     if (this.opmEntity.description == '') {
-      this.msg = '请输入插件说明';
+      this.msg = '插件说明不能为空值！';
       return;
     }
     if (this.opmEntity.body == '') {
-      this.msg = '请输入插件主体';
+      this.msg = '插件主体不能为空值';
       return;
     }
     if (this.parameters.length < 1) {
-      this.msg = '插件主题不正确或者参数填写不完整';
+      this.msg = '插件主体格式错误或者至少需要一个参数';
       return;
     }
-    if (this.parameters
-      .filter(value => value.description != '')
-      .filter(value => value.tips != '')
-      .filter((value) => value.type != '').length === 0) {
-      this.msg = '插件参数必须全部填写！';
-      return;
+    if (this.parameters != null) {
+      if (this.parameters
+        .filter(value => value.description != '')
+        .filter(value => value.tips != '')
+        .filter((value) => value.type != '').length === 0) {
+        this.msg = '插件参数必须全部填写！';
+        return;
+      }
     }
+
     this.opmEntity.parameterStr = JSON.stringify(this.parameters);
     this.http.post('/make', this.opmEntity, {responseType: 'blob'}).subscribe(data => {
       const link = document.createElement('a');
@@ -136,6 +139,7 @@ export class ContactListComponent implements OnInit {
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
+
     });
 
   }

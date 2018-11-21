@@ -15,6 +15,7 @@ import {LogComponent} from './component/log/log.component';
 // 全量备份模块
 import {FullBackComponent} from './component/full-back/full-back.component';
 import {UploadPlugComponent} from './component/upload-plug/upload-plug.component';
+import {PluginManagerComponent} from './component/plugin-manager/plugin-manager.component';
 
 // 1.路由模块初始化
 // 2.配置路由表，导航到某个组件
@@ -37,6 +38,17 @@ const routers: Routes = [
       {
         path: '',
         component: ContactListComponent
+      }
+    ]
+  },
+  {
+    path: 'pluginManager',
+    component: LayoutComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: '',
+        component: PluginManagerComponent
       }
     ]
   },

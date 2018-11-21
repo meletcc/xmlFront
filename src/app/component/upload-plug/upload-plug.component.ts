@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-upload-plug',
@@ -12,7 +13,7 @@ export class UploadPlugComponent implements OnInit {
 
   opmEntity: OpmEntitys;
 
-  constructor(private client: HttpClient) {
+  constructor(private client: HttpClient, private router: Router) {
     this.headerUp = new HttpHeaders({
       'Authorization': 'my-auth-token',
       'enctype': 'multipart/form-data'
@@ -22,12 +23,32 @@ export class UploadPlugComponent implements OnInit {
   ngOnInit() {
   }
 
+  // upload(files) {
+  //   console.log(files);
+  //   this.opmEntity = null;
+  //   const formData = new FormData();
+  //   // formData.append('opm', files.files[0]);
+  //   formData.append('opm', files);
+  //   return this.client.post<Response>('/anaOpm', formData, {headers: this.headerUp}).toPromise().then((response) => {
+  //     console.log(response.code);
+  //     if (response.code === -1) {
+  //       alert(response.msg);
+  //     } else {
+  //       this.opmEntity = response.data;
+  //     }
+  //   });
+  // }
+
   upload(files): any {
-    console.log("A")
+    this.opmEntity = null;
     const formData = new FormData();
     formData.append('opm', files.files[0]);
-    return this.client.post<OpmEntitys>('/anaOpm', formData, {headers: this.headerUp}).toPromise().then((opmEntitys) => {
-      this.opmEntity = opmEntitys;
+    return this.client.post<Response>('/anaOpm', formData, {headers: this.headerUp}).toPromise().then((response) => {
+      if (response.code === -1) {
+        alert(response.msg);
+      } else {
+        this.opmEntity = response.data;
+      }
     });
   }
 
@@ -39,20 +60,21 @@ export class UploadPlugComponent implements OnInit {
 
     let regex3 = /\#{(.+?)\}/i;
     let sql: string = this.opmEntity.body;
+
     for (let i = 0; i < this.opmEntity.params.length; i++) {
       sql = sql.replace(regex3, this.opmEntity.params[i].value);
     }
 
     this.opmEntity.body = sql;
 
-    if (this.opmEntity.back != '') {
+    if (this.opmEntity.back !== '') {
       let back: string = this.opmEntity.back;
       let regex4 = /\#{(.+?)\}/g;
       let p = this.opmEntity.back.match(regex4);
       if (p != null) {
         for (let j = 0; j < p.length; j++) {
           for (let i = 0; i < this.opmEntity.params.length; i++) {
-            if (p[j] == '#{' + this.opmEntity.params[i].name + '}') {
+            if (p[j] === '#{' + this.opmEntity.params[i].name + '}') {
               back = back.replace(regex3, this.opmEntity.params[i].value);
             }
           }
@@ -60,13 +82,40 @@ export class UploadPlugComponent implements OnInit {
         this.opmEntity.back = back;
       }
     }
+
     this.client.post<any>('/run', this.opmEntity).toPromise().then((value) => {
-      console.log(value);
+      if (value.code === -1) {
+        alert(value.msg);
+        window.sessionStorage.removeItem('auto_token');
+        this.router.navigate(['/signin']);
+      }
+    }).catch(reason => {
+      console.log(reason);
     });
 
   }
 }
 
+
+export class Response {
+
+  code: number;
+
+  data: OpmEntitys;
+
+  msg: string;
+
+  constructor(opts: {
+    code?: number,
+    data?: OpmEntitys,
+    msg?: string
+  } = {}) {
+    this.code = opts.code;
+    this.data = opts.data;
+    this.msg = opts.msg;
+  }
+
+}
 
 /**
  * 参数说明
@@ -96,6 +145,7 @@ export class Parameters {
     this.tips = ops.tips || '';
     this.value = ops.value || '';
   }
+
 
 }
 
