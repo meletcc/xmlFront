@@ -14,13 +14,19 @@ import {FormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 // 引入 拦截器
 import {GlobalInterceptor} from './global.interceptor';
-import {HashLocationStrategy, LocationStrategy} from '@angular/common';
+/** 配置 angular i18n **/
+import {HashLocationStrategy, LocationStrategy, registerLocaleData} from '@angular/common';
 import {LoginService} from './service/loginService/login.service';
 import {LogComponent} from './component/log/log.component';
 import {PagingComponent} from './component/paging/paging.component';
 import {FullBackComponent} from './component/full-back/full-back.component';
 import {GetLogService} from './service/logService/get-log.service';
 import {FullbackServiceService} from './service/fullbackService/fullback-service.service';
+import {NgZorroAntdModule, NZ_I18N, zh_CN} from 'ng-zorro-antd';
+import zh from '@angular/common/locales/zh';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
+registerLocaleData(zh);
 
 // 可以写多个拦截器
 export const httpInterceptorProviders = [
@@ -45,7 +51,9 @@ export const httpInterceptorProviders = [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    NgZorroAntdModule.forRoot()
   ],
   providers: [
     httpInterceptorProviders,
@@ -55,9 +63,11 @@ export const httpInterceptorProviders = [
     },
     LoginService,
     GetLogService,
-    FullbackServiceService
+    FullbackServiceService,
+    /** 配置 ng-zorro-antd 国际化 **/
+    {provide: NZ_I18N, useValue: zh_CN}
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }

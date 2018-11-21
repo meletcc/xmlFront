@@ -1,36 +1,27 @@
 <h2 xmlns="">日志记录</h2>
 <hr>
 
-<div class="row">
-  <div class='col-sm-2'>
-    <div class="form-group">
-      <label>选择开始时间：</label>
-      <!--指定 date标记-->
-      <div class="form-group">
-        <input type="datetime-local" class="form-control" [(ngModel)]="startDate">
-      </div>
-    </div>
-  </div>
-  <div class='col-sm-2'>
-    <div class="form-group">
-      <label>选择结束时间：</label>
-      <!--指定 date标记-->
-      <div class="form-group">
-        <input type="datetime-local" class="form-control" [(ngModel)]="endDate">
-      </div>
-    </div>
-  </div>
+<nz-date-picker
+  [nzDisabledDate]="disabledStartDate"
+  nzShowTime
+  nzFormat="yyyy-MM-dd HH:mm:ss"
+  [(ngModel)]="startValue"
+  nzPlaceHolder="Start"
+  (ngModelChange)="onStartChange($event)"
+  (nzOnOpenChange)="handleStartOpenChange($event)">
+</nz-date-picker>
 
-  <div class='col-sm-2'>
-    <div class="form-group">
-      <label></label>
-      <div class="form-group">
-        <input type="button" class="btn btn-default" value="查询" (click)="select()">
-      </div>
-    </div>
-  </div>
-</div>
-<br>
+<nz-date-picker
+  [nzDisabledDate]="disabledEndDate"
+  nzShowTime
+  nzFormat="yyyy-MM-dd HH:mm:ss"
+  [(ngModel)]="endValue"
+  nzPlaceHolder="End"
+  [nzOpen]="endOpen"
+  (ngModelChange)="onEndChange($event)"
+  (nzOnOpenChange)="handleEndOpenChange($event)">
+</nz-date-picker>
+<input type="button" class="btn btn-default" value="查询" (click)="select()">
 
 <table class="table table-bordered">
   <tr>

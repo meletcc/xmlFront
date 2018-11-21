@@ -11,8 +11,45 @@ export class FullBackComponent implements OnInit {
 
   page: Page;
   records: Array<any>;
-  startDate: String = '';
-  endDate: String = '';
+
+  startValue: Date = null;
+  endValue: Date = null;
+  endOpen: boolean = false;
+
+
+  disabledStartDate = (startValue: Date): boolean => {
+    if (!startValue || !this.endValue) {
+      return false;
+    }
+    return startValue.getTime() > this.endValue.getTime();
+  };
+
+  disabledEndDate = (endValue: Date): boolean => {
+    if (!endValue || !this.startValue) {
+      return false;
+    }
+    return endValue.getTime() <= this.startValue.getTime();
+  };
+
+  onStartChange(date: Date): void {
+    this.startValue = date;
+  }
+
+  onEndChange(date: Date): void {
+    this.endValue = date;
+  }
+
+  handleStartOpenChange(open: boolean): void {
+    if (!open) {
+      this.endOpen = true;
+    }
+    console.log('handleStartOpenChange', open, this.endOpen);
+  }
+
+  handleEndOpenChange(open: boolean): void {
+    console.log(open);
+    this.endOpen = open;
+  }
 
   constructor(
     private fullbackservice: FullbackServiceService
@@ -25,13 +62,7 @@ export class FullBackComponent implements OnInit {
   }
 
   getdata() {
-    if (this.startDate !== '') {
-      this.startDate = this.startDate.replace('T', ' ');
-    }
-    if (this.endDate !== '') {
-      this.endDate = this.endDate.replace('T', ' ');
-    }
-    this.fullbackservice.getLog(this.page.currentPage, this.page.currtNum, this.startDate, this.endDate).subscribe(res => {
+    this.fullbackservice.getLog(this.page.currentPage, this.page.currtNum, this.startValue, this.endValue).subscribe(res => {
       this.records = res.rows;
       this.page.totleNum = res.total;
       this.page.pageCount = Math.ceil(res['total'] / this.page.currtNum);
