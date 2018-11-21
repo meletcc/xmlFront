@@ -21,7 +21,7 @@
   (ngModelChange)="onEndChange($event)"
   (nzOnOpenChange)="handleEndOpenChange($event)">
 </nz-date-picker>
-<input type="button" class="btn btn-default" value="查询" (click)="select()">
+<button nz-button nzType="primary" (click)="select()"><i nz-icon type="search" ></i>Search</button>
 
 
 <table class="table table-bordered">

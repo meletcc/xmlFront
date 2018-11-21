@@ -5,16 +5,16 @@ import {Page} from '../../entity/page';
 @Component({
   selector: 'app-log',
   templateUrl: './log.component.html',
-  styleUrls: ['./log.component.css',]
+  styleUrls: ['./log.component.css']
 })
 export class LogComponent implements OnInit {
 
   page: Page;
   records: Array<any>;
 
-  startValue: Date = null;
-  endValue: Date = null;
-  endOpen: boolean = false;
+  startValue: Date; // 开始时间
+  endValue: Date; // 结束时间
+  endOpen = false;
 
 
   disabledStartDate = (startValue: Date): boolean => {
@@ -57,7 +57,7 @@ export class LogComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.page = new Page({currtNum: 1});
+    this.page = new Page();
     this.getdata();
   }
 
