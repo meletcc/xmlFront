@@ -6,24 +6,25 @@ import {SigninComponent} from './component/signin/signin.component';
 import {SignupComponent} from './component/signup/signup.component';
 // 布局模块
 import {LayoutComponent} from './component/layout/layout.component';
-// 联系人列表模块
+// 插件模块
 import {ContactListComponent} from './component/contact-list/contact-list.component';
 // 路由拦截
 import {AuthGuard} from './auth.guard';
 // 日志模块
 import {LogComponent} from './component/log/log.component';
+// 全量备份模块
 import {FullBackComponent} from './component/full-back/full-back.component';
 
 // 1.路由模块初始化
-// 2.配置路由表 导航到某个组件
-// 3.配置路由出口及路由导航链接 <router-outlet></router-outlet>出口
+// 2.配置路由表，导航到某个组件
+// 3.配置路由出口及路由导航链接 <router-outlet></router-outlet> 出口
 
 // 配置路由表
 const routers: Routes = [
   // 默认地址
   {
     path: '',
-    redirectTo: '/contactList', // 根路径跳转 自动先渲染 layout 然后再渲染layout 下面的路由出口
+    redirectTo: '/contactList', // 根路径跳转，自动先渲染 layout组件 然后再渲染 layout组件 下面的路由出口
     pathMatch: 'full' // 必须完全匹配路径的时候才做重定向
   },
   {
@@ -79,6 +80,5 @@ const routers: Routes = [
     RouterModule
   ]
 })
-
 export class AppRoutingModule {
 }

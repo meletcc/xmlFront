@@ -11,8 +11,8 @@ export class LogComponent implements OnInit {
 
   page: Page;
   records: Array<any>;
-  startDate: string;
-  endDate: string;
+  startDate: String = '';
+  endDate: String = '';
 
 
   constructor(

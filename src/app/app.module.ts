@@ -1,6 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-
 import {AppComponent} from './app.component';
 import {NavbarComponent} from './component/navbar/navbar.component';
 import {SidebarComponent} from './component/sidebar/sidebar.component';
@@ -18,8 +17,10 @@ import {GlobalInterceptor} from './global.interceptor';
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 import {LoginService} from './service/loginService/login.service';
 import {LogComponent} from './component/log/log.component';
-import { PagingComponent } from './component/paging/paging.component';
-import { FullBackComponent } from './component/full-back/full-back.component';
+import {PagingComponent} from './component/paging/paging.component';
+import {FullBackComponent} from './component/full-back/full-back.component';
+import {GetLogService} from './service/logService/get-log.service';
+import {FullbackServiceService} from './service/fullbackService/fullback-service.service';
 
 // 可以写多个拦截器
 export const httpInterceptorProviders = [
@@ -27,6 +28,7 @@ export const httpInterceptorProviders = [
 ];
 
 @NgModule({
+  // 声明组件
   declarations: [
     AppComponent,
     NavbarComponent,
@@ -45,14 +47,15 @@ export const httpInterceptorProviders = [
     FormsModule,
     HttpClientModule
   ],
-
   providers: [
     httpInterceptorProviders,
     {
       provide: LocationStrategy,
       useClass: HashLocationStrategy
     },
-    LoginService
+    LoginService,
+    GetLogService,
+    FullbackServiceService
   ],
   bootstrap: [AppComponent],
 })

@@ -14,7 +14,7 @@ export class FullbackServiceService {
     this.baseurl = '/fullBackup';
   }
 
-  getLog(pageNum: number, pageSize: number, startDate: string, endDate: string): any {
+  getLog(pageNum: number, pageSize: number, startDate: String, endDate: String): any {
     const params = new HttpParams()
       .set('pageNum', pageNum.toString())
       .set('pageSize', pageSize.toString())

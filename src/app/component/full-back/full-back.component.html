@@ -1,26 +1,32 @@
 <h2>全量备份</h2>
 <hr>
+
 <div class="row">
-  <div class='col-sm-3'>
+  <div class='col-sm-2'>
     <div class="form-group">
       <label>选择开始时间：</label>
-      <!--指定 date标记-->
+      <!--指定 date 标记-->
       <div class="form-group">
         <input type="datetime-local" class="form-control" [(ngModel)]="startDate">
       </div>
     </div>
   </div>
-  <div class='col-sm-3'>
+  <div class='col-sm-2'>
     <div class="form-group">
       <label>选择结束时间：</label>
-      <!--指定 date标记-->
+      <!--指定 date 标记-->
       <div class="form-group">
-        <input type="datetime-local" class="form-control"  [(ngModel)]="endDate">
+        <input type="datetime-local" class="form-control" [(ngModel)]="endDate">
       </div>
     </div>
   </div>
-  <div class='col-sm-3'>
-    <input type="button" class="btn btn-default" value="查询" (click)="select()">
+  <div class='col-sm-2'>
+    <div class="form-group">
+      <label></label>
+      <div class="form-group">
+        <input type="button" class="btn btn-default" value="查询" (click)="select()">
+      </div>
+    </div>
   </div>
 </div>
 <br>
@@ -33,7 +39,6 @@
     <th>备份路径</th>
     <th>用户</th>
   </tr>
-
   <tr *ngFor="let item of records">
     <td>{{item.fullBackupId}}</td>
     <td>{{item.fullBackupDate}}</td>
@@ -42,6 +47,8 @@
     <td>{{item.name}}</td>
   </tr>
 </table>
+
+<!--翻页组件-->
 <app-paging [page]="page" (getdata)="getdata()" [countArr]="[1,2,3,4]"></app-paging>
 
 
