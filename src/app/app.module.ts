@@ -8,6 +8,7 @@ import {SignupComponent} from './component/signup/signup.component';
 import {ContactListComponent} from './component/contact-list/contact-list.component';
 import {AppRoutingModule} from './app-routing.module';
 import {LayoutComponent} from './component/layout/layout.component';
+import {UploadPlugComponent} from './component/upload-plug/upload-plug.component';
 // 导入表单功能，比如双向绑定
 import {FormsModule} from '@angular/forms';
 // 引入http模型
@@ -45,7 +46,8 @@ export const httpInterceptorProviders = [
     LayoutComponent,
     LogComponent,
     PagingComponent,
-    FullBackComponent
+    FullBackComponent,
+    UploadPlugComponent
   ],
   imports: [
     BrowserModule,

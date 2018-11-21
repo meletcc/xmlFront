@@ -23,7 +23,7 @@
 </nz-date-picker>
 <button nz-button nzType="primary" (click)="select()"><i nz-icon type="search"></i>Search</button>
 
-<nz-table #basicTable [nzData]="records">
+<nz-table #basicTable [nzData]="records" [nzPageIndex]="page.currentPage" [nzPageSize]="page.currtNum">
   <thead>
   <tr>
     <th>编号</th>
@@ -52,6 +52,6 @@
   </tr>
   </tbody>
 </nz-table>
-<app-paging [page]="page" (getdata)="getdata()"></app-paging>
+<!--<app-paging [page]="page" (getdata)="getdata()"></app-paging>-->
 
 

@@ -20,12 +20,12 @@
         </li>
         <li>
           <div style="width: 130px;margin-top: 8px;">
-            <span>{{user.email}}</span>
+            <span>欢迎：{{user}}</span>
           </div>
         </li>
         <li>
           <div style="width: 50px;margin-top: 8px;">
-            <span (click)="signout()" [class.test]="mouseOn">退出</span>
+            <a (click)="signout()" [class.test]="mouseOn">退出</a>
           </div>
         </li>
       </ul>

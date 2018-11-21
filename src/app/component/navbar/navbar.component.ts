@@ -11,7 +11,7 @@ export class NavbarComponent implements OnInit {
 
   today: Date = new Date();
 
-  user = JSON.parse(window.localStorage.getItem('user') || '{}');
+  user = JSON.parse(window.sessionStorage.getItem('user'));
 
   // 解决颜色变化
   mouseOn: Boolean = false;
@@ -23,18 +23,10 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
   }
 
+  // 退出按钮
   signout() {
-    this.mouseOn = true;
-    this.http.delete('http://localhost:3000/session')
-      .toPromise()
-      .then(data => {
-        window.localStorage.removeItem('auto_token');
-      }).catch(err => {
-      window.alert('退出失败');
-    });
-    setTimeout(() => {
-      this.mouseOn = false;
-    }, 200);
+    window.sessionStorage.removeItem('auto_token');
+    this.router.navigate(['/signin']);
   }
 
 }
