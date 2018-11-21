@@ -23,6 +23,7 @@ import {PagingComponent} from './component/paging/paging.component';
 import {FullBackComponent} from './component/full-back/full-back.component';
 import {GetLogService} from './service/logService/get-log.service';
 import {FullbackServiceService} from './service/fullbackService/fullback-service.service';
+/** 配置 angular i18n **/
 import {NgZorroAntdModule, NZ_I18N, zh_CN} from 'ng-zorro-antd';
 import zh from '@angular/common/locales/zh';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';

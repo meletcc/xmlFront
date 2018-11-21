@@ -23,6 +23,7 @@ export class UploadPlugComponent implements OnInit {
   }
 
   upload(files): any {
+    console.log("A")
     const formData = new FormData();
     formData.append('opm', files.files[0]);
     return this.client.post<OpmEntitys>('/anaOpm', formData, {headers: this.headerUp}).toPromise().then((opmEntitys) => {

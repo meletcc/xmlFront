@@ -1,7 +1,13 @@
 <div class="container" style="margin-top: 70px">
   <div class="form-group">
-    <label>上传插件</label>
-    <input type="file" name="files" #newFiles (change)="upload(newFiles)"  class="form-control" value="选择文件">
+    <label>上传插件:</label>
+    <!--<nz-upload-->
+    <!--nzAction="https://jsonplaceholder.typicode.com/posts/">-->
+    <!--<button nz-button name="files" #newFiles (change)="upload(newFiles)">-->
+    <!--<i nz-icon type="upload"></i><span>Click to Upload</span>-->
+    <!--</button>-->
+    <!--</nz-upload>-->
+    <input type="file" name="files" #newFiles (change)="upload(newFiles)" class="form-control" value="选择文件">
   </div>
 </div>
 <div class="container">

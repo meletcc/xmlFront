@@ -23,25 +23,33 @@
 </nz-date-picker>
 <button nz-button nzType="primary" (click)="select()"><i nz-icon type="search" ></i>Search</button>
 
-
-<table class="table table-bordered">
+<nz-table #basicTable [nzData]="records" [nzPageIndex]="page.currentPage" [nzPageSize]="page.currtNum">
+  <thead>
   <tr>
     <th>编号</th>
     <th>备份时间</th>
     <th>备份用户</th>
     <th>备份路径</th>
     <th>用户</th>
+    <th>操作</th>
   </tr>
-  <tr *ngFor="let item of records">
+  </thead>
+  <tbody>
+
+  <tr *ngFor="let item of basicTable.data">
     <td>{{item.fullBackupId}}</td>
     <td>{{item.fullBackupDate}}</td>
     <td>{{item.fullBackupUserId}}</td>
     <td>{{item.fullBackupFilePath}}</td>
     <td>{{item.name}}</td>
+    <td>
+      <a href="">恢复</a>
+    </td>
   </tr>
-</table>
+  </tbody>
+</nz-table>
 
 <!--翻页组件-->
-<app-paging [page]="page" (getdata)="getdata()" [countArr]="[1,2,3,4]"></app-paging>
+<!--<app-paging [page]="page" (getdata)="getdata()" [countArr]="[1,2,3,4]"></app-paging>-->
 
 
