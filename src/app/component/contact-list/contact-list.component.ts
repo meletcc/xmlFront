@@ -5,6 +5,7 @@ import {FormControl} from '@angular/forms';
 import {NgTools_InternalApi_NG2_ListLazyRoutes_Options} from '@angular/compiler-cli/src/ngtools_api';
 import {promise} from 'selenium-webdriver';
 import filter = promise.filter;
+import {Plugin} from '../../entity/plugin';
 
 @Component({
   selector: 'app-contact-list',
@@ -17,7 +18,7 @@ export class ContactListComponent implements OnInit {
   parameters: Array<Parameter> = [];
 
   //操作实体类
-  opmEntity: OpmEntity = new OpmEntity();
+  plugin: Plugin = new Plugin();
 
   //是否显示备份框
   isBackup: boolean = false;
@@ -30,7 +31,6 @@ export class ContactListComponent implements OnInit {
   }
 
   ngOnInit() {
-
   }
 
   print() {
@@ -39,14 +39,18 @@ export class ContactListComponent implements OnInit {
 
   //获取参数列表
   acquireSql(): void {
-
+    console.log(this.plugin);
     this.parameters = [];
     this.msg = '';
 
     let regex3 = /\#{(.+?)\}/g;
     let temp = [];
-    let p1 = this.opmEntity.body.match(regex3);
-    let p2 = this.opmEntity.back.match(regex3);
+    let p1 = this.plugin.pluginBody.match(regex3);
+    let p2;
+    if (this.plugin.pluginBack != null) {
+      p2 = this.plugin.pluginBack.match(regex3);
+    }
+
 
     // p2 = p2.filter(value => value == '#{name}');
     // if (p2 != null) {
@@ -92,11 +96,11 @@ export class ContactListComponent implements OnInit {
   //取消或者保存备份
   backUp(): void {
     if (this.isBackup) {
-      this.opmEntity.back = '';
+      this.plugin.pluginBack = '';
       this.acquireSql();
       this.isBackup = false;
     } else {
-      if (this.opmEntity.body == '') {
+      if (this.plugin.pluginBody == '') {
         this.msg = '定义备份之前，请先定义插件主体！';
         return;
       }
@@ -107,11 +111,11 @@ export class ContactListComponent implements OnInit {
   //保存插件
   savePlugIn(): void {
     //to do service
-    if (this.opmEntity.description == '') {
+    if (this.plugin.pluginDescription == '') {
       this.msg = '插件说明不能为空值！';
       return;
     }
-    if (this.opmEntity.body == '') {
+    if (this.plugin.pluginBody == '') {
       this.msg = '插件主体不能为空值';
       return;
     }
@@ -129,12 +133,12 @@ export class ContactListComponent implements OnInit {
       }
     }
 
-    this.opmEntity.parameterStr = JSON.stringify(this.parameters);
-    this.http.post('/make', this.opmEntity, {responseType: 'blob'}).subscribe(data => {
+    this.plugin.pluginParameterStr = JSON.stringify(this.parameters);
+    this.http.post('/make', this.plugin, {responseType: 'blob'}).subscribe(data => {
       const link = document.createElement('a');
       const blob = new Blob([data], {type: 'application/text'});
       link.setAttribute('href', window.URL.createObjectURL(blob));
-      link.setAttribute('download', this.opmEntity.description + '.opm');
+      link.setAttribute('download', this.plugin.pluginDescription + '.opm');
       link.style.visibility = 'hidden';
       document.body.appendChild(link);
       link.click();
@@ -175,23 +179,23 @@ export class Parameter {
 /**
  * 参数主题说明
  */
-export class OpmEntity {
+/*export class OpmEntity {
 
-  /**
+  /!**
    * 参数功能说明
-   */
-  description: string;
-  /**
+   *!/
+  pluginDescription: string;
+  /!**
    * 插件主体
-   */
+   *!/
   body: string;
-  /**
+  /!**
    * 插件备份
-   */
+   *!/
   back: string;
-  /**
+  /!**
    * 插件参数{JSON格式}
-   */
+   *!/
   parameterStr: string;
 
   constructor(ops: {
@@ -206,4 +210,4 @@ export class OpmEntity {
     this.parameterStr = ops.parameterStr || '';
   }
 
-}
+}*/

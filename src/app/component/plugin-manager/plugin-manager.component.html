@@ -1,11 +1,12 @@
 <h2 xmlns="">插件管理</h2>
 <hr>
-<label>上传插件</label>
-<input type="file" name="files" style="padding-top:3px;width: 22%;" #newFiles (change)="upload(newFiles)" class="form-control"
-       value="选择文件">
+<!--<label>上传插件</label>-->
+<!--<input type="file" name="files" style="padding-top:3px;width: 22%;" #newFiles (change)="upload(newFiles)"-->
+<!--class="form-control"-->
+<!--value="选择文件">-->
 
 <nz-input-group nzSearch [nzSuffix]="suffixIconButton">
-  <input type="text" nz-input placeholder="input search text">
+  <input type="text" nz-input placeholder="请输入插件名">
 </nz-input-group>
 <ng-template #suffixIconButton>
   <button nz-button nzType="primary" nzSearch (click)="select()"><i nz-icon type="search"></i></button>
@@ -15,19 +16,13 @@
   <thead>
   <tr>
     <th>插件名</th>
-    <th>插件说明</th>
     <th>操作</th>
   </tr>
   </thead>
-  <tbody>
 
+  <tbody>
   <tr *ngFor="let item of basicTable.data">
-    <td>{{item.recordId}}</td>
-    <td>{{item.recordBody}}</td>
-    <td>{{item.recordDescription}}</td>
-    <td>{{item.recordDate}}</td>
-    <td>{{item.userId}}</td>
-    <td>{{item.recordBackup}}</td>
+    <td>{{item.pluginDescription}}</td>
     <td>
       <a href="">执行</a>
       <nz-divider nzType="vertical"></nz-divider>
@@ -36,7 +31,3 @@
   </tr>
   </tbody>
 </nz-table>
-<!--<app-paging [page]="page" (getdata)="getdata()"></app-paging>-->
-
-
-

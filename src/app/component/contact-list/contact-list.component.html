@@ -4,11 +4,12 @@
 <div class="container" style="margin-top: 10px;margin-left: -15px; ">
   <div class="form-group">
     <label style="font-size:18px;">插件说明</label>
-    <input type="text" class="form-control" [(ngModel)]="opmEntity.description" name="description" placeholder="插件说明">
+    <input type="text" class="form-control" [(ngModel)]="plugin.pluginDescription" name="description"
+           placeholder="插件说明">
   </div>
   <div class="form-group">
     <label style="font-size:18px;">插件代码</label>
-    <textarea class="form-control" [(ngModel)]="opmEntity.body" name="body" (change)="acquireSql()"
+    <textarea class="form-control" [(ngModel)]="plugin.pluginBody" name="body" (change)="acquireSql()"
               placeholder="自定义sql 格式为 update set prama1=#{param1}  prama2=#{param2} where param3=#{param3}">
       </textarea>
   </div>
@@ -19,7 +20,7 @@
   <div *ngIf="isBackup">
     <div class="form-group">
       <label>备份</label>
-      <input type="text" class="form-control" [(ngModel)]="opmEntity.back" name="back" (change)="acquireSql()"
+      <input type="text" class="form-control" [(ngModel)]="plugin.pluginBack" name="back" (change)="acquireSql()"
              placeholder="备份">
     </div>
   </div>
