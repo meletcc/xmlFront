@@ -43,13 +43,13 @@ export class UploadPlugComponent implements OnInit {
     this.opmEntity = null;
     const formData = new FormData();
     formData.append('opm', files.files[0]);
-    return this.client.post<Response>('/anaOpm', formData, {headers: this.headerUp}).toPromise().then((response) => {
-      if (response.code === -1) {
-        alert(response.msg);
-      } else {
-        this.opmEntity = response.data;
-      }
-    });
+            return this.client.post<Response>('/plugin/anaOpm', formData, {headers: this.headerUp}).toPromise().then((response) => {
+              if (response.code === -1) {
+                alert(response.msg);
+              } else {
+                this.opmEntity = response.data;
+              }
+            });
   }
 
   changeParamterName(newValue, index): any {
@@ -83,7 +83,7 @@ export class UploadPlugComponent implements OnInit {
       }
     }
 
-    this.client.post<any>('/run', this.opmEntity).toPromise().then((value) => {
+    this.client.post<any>('/plugin/run', this.opmEntity).toPromise().then((value) => {
       if (value.code === -1) {
         alert(value.msg);
         window.sessionStorage.removeItem('auto_token');

@@ -134,7 +134,7 @@ export class ContactListComponent implements OnInit {
     }
 
     this.plugin.pluginParameterStr = JSON.stringify(this.parameters);
-    this.http.post('/make', this.plugin, {responseType: 'blob'}).subscribe(data => {
+    this.http.post('/plugin/make', this.plugin, {responseType: 'blob'}).subscribe(data => {
       const link = document.createElement('a');
       const blob = new Blob([data], {type: 'application/text'});
       link.setAttribute('href', window.URL.createObjectURL(blob));
@@ -173,41 +173,4 @@ export class Parameter {
     this.type = ops.type || 'text';
     this.tips = ops.tips || '';
   }
-
 }
-
-/**
- * 参数主题说明
- */
-/*export class OpmEntity {
-
-  /!**
-   * 参数功能说明
-   *!/
-  pluginDescription: string;
-  /!**
-   * 插件主体
-   *!/
-  body: string;
-  /!**
-   * 插件备份
-   *!/
-  back: string;
-  /!**
-   * 插件参数{JSON格式}
-   *!/
-  parameterStr: string;
-
-  constructor(ops: {
-    description?: string,
-    body?: string,
-    back?: string,
-    parameterStr?: string
-  } = {}) {
-    this.description = ops.description || '';
-    this.body = ops.body || '';
-    this.back = ops.back || '';
-    this.parameterStr = ops.parameterStr || '';
-  }
-
-}*/

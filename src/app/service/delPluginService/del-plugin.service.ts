@@ -4,7 +4,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class GetPluginService {
+export class DelPluginService {
 
   baseurl;
 
@@ -14,10 +14,9 @@ export class GetPluginService {
     this.baseurl = '/plugin';
   }
 
-  getPlugin(pageNum: number, pageSize: number): any {
+  delPlugin(pluginId: string): any {
     const params = new HttpParams()
-      .set('pageNum', pageNum.toString())
-      .set('pageSize', pageSize.toString());
-    return this.http.post(this.baseurl + '/list', params);
+      .set('pluginId', pluginId.toString());
+    return this.http.post(this.baseurl + '/del', params);
   }
 }
