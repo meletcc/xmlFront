@@ -1,32 +1,37 @@
 <h2 xmlns="">日志记录</h2>
 <hr>
 
-<nz-date-picker
-  [nzDisabledDate]="disabledStartDate"
-  nzShowTime
-  nzFormat="yyyy-MM-dd HH:mm:ss"
-  [(ngModel)]="startValue"
-  nzPlaceHolder="Start"
-  (ngModelChange)="onStartChange($event)"
-  (nzOnOpenChange)="handleStartOpenChange($event)">
-</nz-date-picker>
+<div>
+  <nz-date-picker
+    [nzDisabledDate]="disabledStartDate"
+    nzShowTime
+    nzFormat="yyyy-MM-dd HH:mm:ss"
+    [(ngModel)]="startValue"
+    nzPlaceHolder="Start"
+    (ngModelChange)="onStartChange($event)"
+    (nzOnOpenChange)="handleStartOpenChange($event)">
+  </nz-date-picker>
 
-<nz-date-picker
-  [nzDisabledDate]="disabledEndDate"
-  nzShowTime
-  nzFormat="yyyy-MM-dd HH:mm:ss"
-  [(ngModel)]="endValue"
-  nzPlaceHolder="End"
-  [nzOpen]="endOpen"
-  (ngModelChange)="onEndChange($event)"
-  (nzOnOpenChange)="handleEndOpenChange($event)">
-</nz-date-picker>
-<button nz-button nzType="primary" (click)="select()"><i nz-icon type="search"></i>Search</button>
+  <nz-date-picker
+    [nzDisabledDate]="disabledEndDate"
+    nzShowTime
+    nzFormat="yyyy-MM-dd HH:mm:ss"
+    [(ngModel)]="endValue"
+    nzPlaceHolder="End"
+    [nzOpen]="endOpen"
+    (ngModelChange)="onEndChange($event)"
+    (nzOnOpenChange)="handleEndOpenChange($event)">
+  </nz-date-picker>
+  <button nz-button nzType="primary" (click)="select()"><i nz-icon type="search"></i>Search</button>
+</div>
 
-<nz-table #basicTable [nzData]="records" [nzPageIndex]="page.currentPage" [nzPageSize]="page.currtNum">
+<br>
+
+<nz-table #basicTable [nzData]="records" [nzPageIndex]="1" [nzPageSize]="10" [nzScroll] [nzShowQuickJumper]="true"
+          [nzShowSizeChanger]="true" [nzBordered]="true">
   <thead>
   <tr>
-    <th>编号</th>
+    <!--<th>编号</th>-->
     <th>sql</th>
     <th>说明</th>
     <th>时间</th>
@@ -38,20 +43,17 @@
   <tbody>
 
   <tr *ngFor="let item of basicTable.data">
-    <td>{{item.recordId}}</td>
+    <!--<td>{{item.recordId}}</td>-->
     <td>{{item.recordBody}}</td>
     <td>{{item.recordDescription}}</td>
     <td>{{item.recordDate}}</td>
     <td>{{item.userId}}</td>
     <td>{{item.recordBackup}}</td>
     <td>
-      <a href="">查看</a>
+      <a href="#">查看</a>
       <nz-divider nzType="vertical"></nz-divider>
-      <a href="">恢复</a>
+      <a href="#">恢复</a>
     </td>
   </tr>
   </tbody>
 </nz-table>
-<!--<app-paging [page]="page" (getdata)="getdata()"></app-paging>-->
-
-

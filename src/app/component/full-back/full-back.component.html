@@ -1,29 +1,33 @@
 <h2>全量备份</h2>
 <hr>
+<div>
+  <nz-date-picker
+    [nzDisabledDate]="disabledStartDate"
+    nzShowTime
+    nzFormat="yyyy-MM-dd HH:mm:ss"
+    [(ngModel)]="startValue"
+    nzPlaceHolder="Start"
+    (ngModelChange)="onStartChange($event)"
+    (nzOnOpenChange)="handleStartOpenChange($event)">
+  </nz-date-picker>
 
-<nz-date-picker
-  [nzDisabledDate]="disabledStartDate"
-  nzShowTime
-  nzFormat="yyyy-MM-dd HH:mm:ss"
-  [(ngModel)]="startValue"
-  nzPlaceHolder="Start"
-  (ngModelChange)="onStartChange($event)"
-  (nzOnOpenChange)="handleStartOpenChange($event)">
-</nz-date-picker>
+  <nz-date-picker
+    [nzDisabledDate]="disabledEndDate"
+    nzShowTime
+    nzFormat="yyyy-MM-dd HH:mm:ss"
+    [(ngModel)]="endValue"
+    nzPlaceHolder="End"
+    [nzOpen]="endOpen"
+    (ngModelChange)="onEndChange($event)"
+    (nzOnOpenChange)="handleEndOpenChange($event)">
+  </nz-date-picker>
+  <button nz-button nzType="primary" (click)="select()"><i nz-icon type="search" ></i>Search</button>
+</div>
 
-<nz-date-picker
-  [nzDisabledDate]="disabledEndDate"
-  nzShowTime
-  nzFormat="yyyy-MM-dd HH:mm:ss"
-  [(ngModel)]="endValue"
-  nzPlaceHolder="End"
-  [nzOpen]="endOpen"
-  (ngModelChange)="onEndChange($event)"
-  (nzOnOpenChange)="handleEndOpenChange($event)">
-</nz-date-picker>
-<button nz-button nzType="primary" (click)="select()"><i nz-icon type="search" ></i>Search</button>
+<br>
 
-<nz-table #basicTable [nzData]="records" [nzPageIndex]="page.currentPage" [nzPageSize]="page.currtNum">
+<nz-table #basicTable [nzData]="records" [nzPageIndex]="1" [nzPageSize]="10" [nzScroll] [nzShowQuickJumper]="true"
+          [nzShowSizeChanger]="true" [nzBordered]="true">
   <thead>
   <tr>
     <th>编号</th>

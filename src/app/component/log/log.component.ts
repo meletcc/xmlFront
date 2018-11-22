@@ -64,11 +64,8 @@ export class LogComponent implements OnInit {
   getdata() {
     this.getlog.getLog(this.page.currentPage, this.page.currtNum, this.startValue, this.endValue).subscribe(res => {
       // 获取数据
+      console.log(res);
       this.records = res.rows;
-      // this.page.totleNum = res.total;
-      // this.page.pageCount = Math.ceil(res['total'] / this.page.currtNum);
-      // this.page.startNum = ((this.page.currentPage - 1) * this.page.currtNum) + 1;
-      // this.page.getCurrtNum = this.page.startNum - 1 + res.rows.length;
     });
   }
 

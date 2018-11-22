@@ -4,15 +4,19 @@
 <!--<input type="file" name="files" style="padding-top:3px;width: 22%;" #newFiles (change)="upload(newFiles)"-->
 <!--class="form-control"-->
 <!--value="选择文件">-->
+<div style="width: 20%">
+  <nz-input-group nzSearch [nzSuffix]="suffixIconButton">
+    <input type="text" nz-input placeholder="请输入插件名">
+  </nz-input-group>
+  <ng-template #suffixIconButton>
+    <button nz-button nzType="primary" nzSearch (click)="select()"><i nz-icon type="search"></i></button>
+  </ng-template>
+</div>
 
-<nz-input-group nzSearch [nzSuffix]="suffixIconButton">
-  <input type="text" nz-input placeholder="请输入插件名">
-</nz-input-group>
-<ng-template #suffixIconButton>
-  <button nz-button nzType="primary" nzSearch (click)="select()"><i nz-icon type="search"></i></button>
-</ng-template>
+<br>
 
-<nz-table #basicTable [nzData]="records" [nzPageIndex]="1" [nzPageSize]="10">
+<nz-table #basicTable [nzData]="records" [nzPageIndex]="1" [nzPageSize]="10" [nzScroll] [nzShowQuickJumper]="true"
+          [nzShowSizeChanger]="true" [nzBordered]="true">
   <thead>
   <tr>
     <th>插件名</th>
