@@ -29,7 +29,7 @@
     <td>{{item.pluginDescription}}</td>
     <td>
       <a href="">执行</a>
-      <nz-divider nzType="vertical"></nz-divider>
+      <nz-divider nzType="vertical" routerLink="/plugin" (click)="toUsePluginPage(item)"></nz-divider>
       <a href="javascript:void(0);" (click)="del(item.pluginId)">删除</a>
     </td>
   </tr>

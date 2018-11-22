@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Router} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
+import {Parameters} from '../../entity/Parameters';
+import {Plugin} from '../../entity/plugin';
+import {GetPluginService} from '../../service/getplugin/get-plugin.service';
 
 @Component({
   selector: 'app-upload-plug',
@@ -11,9 +14,11 @@ export class UploadPlugComponent implements OnInit {
 
   headerUp: HttpHeaders;
 
-  opmEntity: OpmEntitys;
+  opmEntity: OpmEntitys = new OpmEntitys();
 
-  constructor(private client: HttpClient, private router: Router) {
+  plugin: Plugin = new Plugin();
+
+  constructor(private client: HttpClient, private get: GetPluginService, private router: Router) {
     this.headerUp = new HttpHeaders({
       'Authorization': 'my-auth-token',
       'enctype': 'multipart/form-data'
@@ -21,6 +26,7 @@ export class UploadPlugComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.plugin = this.get.plugins;
   }
 
   // upload(files) {
@@ -43,47 +49,47 @@ export class UploadPlugComponent implements OnInit {
     this.opmEntity = null;
     const formData = new FormData();
     formData.append('opm', files.files[0]);
-            return this.client.post<Response>('/plugin/anaOpm', formData, {headers: this.headerUp}).toPromise().then((response) => {
-              if (response.code === -1) {
-                alert(response.msg);
-              } else {
-                this.opmEntity = response.data;
-              }
-            });
+    return this.client.post<Response>('/plugin/anaOpm', formData, {headers: this.headerUp}).toPromise().then((response) => {
+      if (response.code === -1) {
+        alert(response.msg);
+      } else {
+        this.opmEntity = response.data;
+      }
+    });
   }
 
   changeParamterName(newValue, index): any {
-    this.opmEntity.params[index].value = newValue;
+    this.plugin.pluginParameterStr[index].value = newValue;
   }
 
   submit(): void {
 
     let regex3 = /\#{(.+?)\}/i;
-    let sql: string = this.opmEntity.body;
+    let sql: string = this.plugin.pluginBody;
 
-    for (let i = 0; i < this.opmEntity.params.length; i++) {
-      sql = sql.replace(regex3, this.opmEntity.params[i].value);
+    for (let i = 0; i < this.plugin.pluginParameterStr.length; i++) {
+      sql = sql.replace(regex3, this.plugin.pluginParameterStr[i].value);
     }
 
-    this.opmEntity.body = sql;
+    this.plugin.pluginBody = sql;
 
-    if (this.opmEntity.back !== '') {
-      let back: string = this.opmEntity.back;
+    if (this.plugin.pluginBack !== '') {
+      let back: string = this.plugin.pluginBack;
       let regex4 = /\#{(.+?)\}/g;
-      let p = this.opmEntity.back.match(regex4);
+      let p = this.plugin.pluginBack.match(regex4);
       if (p != null) {
         for (let j = 0; j < p.length; j++) {
-          for (let i = 0; i < this.opmEntity.params.length; i++) {
-            if (p[j] === '#{' + this.opmEntity.params[i].name + '}') {
-              back = back.replace(regex3, this.opmEntity.params[i].value);
+          for (let i = 0; i < this.plugin.pluginParameterStr.length; i++) {
+            if (p[j] === '#{' + this.plugin.pluginParameterStr[i].name + '}') {
+              back = back.replace(regex3, this.plugin.pluginParameterStr[i].value);
             }
           }
         }
-        this.opmEntity.back = back;
+        this.plugin.pluginBack = back;
       }
     }
 
-    this.client.post<any>('/plugin/run', this.opmEntity).toPromise().then((value) => {
+    this.client.post<any>('/plugin/run', this.plugin).toPromise().then((value) => {
       if (value.code === -1) {
         alert(value.msg);
         window.sessionStorage.removeItem('auto_token');
@@ -120,34 +126,34 @@ export class Response {
 /**
  * 参数说明
  */
-export class Parameters {
-
-  name: string;
-
-  description: string;
-
-  type: string;
-
-  tips: string;
-
-  value: string;
-
-  constructor(ops: {
-    description?: string,
-    name?: string,
-    type?: string,
-    tips?: string,
-    value?: string
-  } = {}) {
-    this.description = ops.description;
-    this.name = ops.name || '';
-    this.type = ops.type || '';
-    this.tips = ops.tips || '';
-    this.value = ops.value || '';
-  }
-
-
-}
+// export class Parameters {
+//
+//   name: string;
+//
+//   description: string;
+//
+//   type: string;
+//
+//   tips: string;
+//
+//   value: string;
+//
+//   constructor(ops: {
+//     description?: string,
+//     name?: string,
+//     type?: string,
+//     tips?: string,
+//     value?: string
+//   } = {}) {
+//     this.description = ops.description;
+//     this.name = ops.name || '';
+//     this.type = ops.type || '';
+//     this.tips = ops.tips || '';
+//     this.value = ops.value || '';
+//   }
+//
+//
+// }
 
 /**
  * 参数主题说明

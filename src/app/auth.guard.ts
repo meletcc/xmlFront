@@ -12,11 +12,11 @@ export class AuthGuard implements CanActivate {
   // 把路由判定功能写到这
   // 控制是否允许进入路由
   canActivate() {
-    const token = window.sessionStorage.getItem('auto_token');
-    if (!token) {
-      this.router.navigate(['/signin']);
-      return false;
-    }
+    // const token = window.sessionStorage.getItem('auto_token');
+    // if (!token) {
+    //   this.router.navigate(['/signin']);
+    //   return false;
+    // }
     // 放行
     return true;
   }

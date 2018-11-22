@@ -41,6 +41,13 @@ export class PluginManagerComponent implements OnInit {
   // }
 
   /**
+   *  跳转插件使用界面
+   */
+  toUsePluginPage(item): void {
+    this.getplugin.plugins = item;
+  }
+
+  /**
    * 删除插件按钮
    */
   del(pluginId: string) {

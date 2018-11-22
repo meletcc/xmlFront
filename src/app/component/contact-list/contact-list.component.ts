@@ -6,6 +6,7 @@ import {NgTools_InternalApi_NG2_ListLazyRoutes_Options} from '@angular/compiler-
 import {promise} from 'selenium-webdriver';
 import filter = promise.filter;
 import {Plugin} from '../../entity/plugin';
+import {Parameters} from '../../entity/Parameters';
 
 @Component({
   selector: 'app-contact-list',
@@ -18,7 +19,7 @@ export class ContactListComponent implements OnInit {
   parameters: Array<Parameter> = [];
 
   //操作实体类
-  plugin: Plugin = new Plugin();
+  plugin: Plugins = new Plugins();
 
   //是否显示备份框
   isBackup: boolean = false;
@@ -173,4 +174,44 @@ export class Parameter {
     this.type = ops.type || 'text';
     this.tips = ops.tips || '';
   }
+}
+
+export class Plugins {
+  /**
+   * 插件id
+   */
+  pluginId: String;
+  /**
+   * 参数功能说明
+   */
+  pluginDescription: String;
+  /**
+   * 插件主体
+   */
+  pluginBody: String;
+  /**
+   * 插件备份
+   */
+  pluginBack: String;
+  /**
+   * 插件参数{JSON格式}
+   */
+  pluginParameterStr: string;
+  /**
+   * 所属用户
+   */
+  userId: String;
+
+  constructor(ops: {
+    pluginDescription?: string,
+    pluginBody?: string,
+    pluginBack?: string,
+    pluginParameterStr?: string;
+  } = {}) {
+    this.pluginDescription = ops.pluginDescription || '';
+    this.pluginBody = ops.pluginBody || '';
+    this.pluginBack = ops.pluginBack || '';
+    this.pluginParameterStr = ops.pluginParameterStr || '';
+  }
+
 }

@@ -1,24 +1,26 @@
+import {Parameters} from './Parameters';
+
 export class Plugin {
   /**
    * 插件id
    */
-  pluginId: String;
+  pluginId: string;
   /**
    * 参数功能说明
    */
-  pluginDescription: String;
+  pluginDescription: string;
   /**
    * 插件主体
    */
-  pluginBody: String;
+  pluginBody: string;
   /**
    * 插件备份
    */
-  pluginBack: String;
+  pluginBack: string;
   /**
    * 插件参数{JSON格式}
    */
-  pluginParameterStr: String;
+  pluginParameterStr: Array<Parameters>;
   /**
    * 所属用户
    */
@@ -28,12 +30,12 @@ export class Plugin {
     pluginDescription?: string,
     pluginBody?: string,
     pluginBack?: string,
-    pluginParameterStr?: string
+    pluginParameterStr?: Array<Parameters>;
   } = {}) {
     this.pluginDescription = ops.pluginDescription || '';
     this.pluginBody = ops.pluginBody || '';
     this.pluginBack = ops.pluginBack || '';
-    this.pluginParameterStr = ops.pluginParameterStr || '';
+    this.pluginParameterStr = ops.pluginParameterStr || [];
   }
 
 }

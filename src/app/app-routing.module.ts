@@ -33,7 +33,6 @@ const routers: Routes = [
     // 输入链接 contactList 时 会先渲染 layout 布局组件，然后再渲染子组建到 layout 组件下的路由出口
     path: 'contactList',
     component: LayoutComponent,
-    canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -44,7 +43,6 @@ const routers: Routes = [
   {
     path: 'pluginManager',
     component: LayoutComponent,
-    canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -55,7 +53,6 @@ const routers: Routes = [
   {
     path: 'plugin',
     component: LayoutComponent,
-    canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -66,7 +63,6 @@ const routers: Routes = [
   {
     path: 'log',
     component: LayoutComponent,
-    canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -77,7 +73,6 @@ const routers: Routes = [
   {
     path: 'fullback',
     component: LayoutComponent,
-    canActivate: [AuthGuard],
     children: [
       {
         path: '',

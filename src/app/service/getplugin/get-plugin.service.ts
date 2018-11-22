@@ -1,5 +1,6 @@
-import {Injectable} from '@angular/core';
+import {Injectable, EventEmitter} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
+import {Plugin} from '../../entity/plugin';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,8 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 export class GetPluginService {
 
   baseurl;
+
+  plugins: Plugin;
 
   constructor(
     private http: HttpClient
