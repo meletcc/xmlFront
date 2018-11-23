@@ -24,21 +24,21 @@ export class SigninComponent implements OnInit {
 
   // 提交登录表单
   signinSub() {
-    // this.loginSvr.login(this.signinForm.name, this.signinForm.pwd)
-    //   .subscribe((data: any) => {
-    //     // if (data.code === 0) {
-    //     //   // 状态码为 0 表示登录成功，把 token 共享出去
-    //     //   window.sessionStorage.setItem('auto_token', data.data.token);
-    //     //   // 对象存储要转成字符串
-    //     //   window.sessionStorage.setItem('user', JSON.stringify(data.data.name));
-    //     //   alert('登录成功!');
-    //     // } else {
-    //     //   alert(data.msg);
-    //     // }
-    //     // this.router.navigate(['/']);
-    //   }, err => {
-    //     console.log(err);
-    //   });
+    this.loginSvr.login(this.signinForm.name, this.signinForm.pwd)
+      .subscribe((data: any) => {
+        // if (data.code === 0) {
+        //   // 状态码为 0 表示登录成功，把 token 共享出去
+        //   window.sessionStorage.setItem('auto_token', data.data.token);
+        //   // 对象存储要转成字符串
+        //   window.sessionStorage.setItem('user', JSON.stringify(data.data.name));
+        //   alert('登录成功!');
+        // } else {
+        //   alert(data.msg);
+        // }
+        // this.router.navigate(['/']);
+      }, err => {
+        console.log(err);
+      });
   }
 
 }
