@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FullbackServiceService} from '../../service/fullbackService/fullback-service.service';
 import {Page} from '../../entity/page';
+import {DelService} from '../../service/delService/del.service';
 
 @Component({
   selector: 'app-full-back',
@@ -11,7 +12,6 @@ export class FullBackComponent implements OnInit {
 
   page: Page;
   records: Array<any>;
-
   startValue: Date;
   endValue: Date;
   endOpen = false;
@@ -52,7 +52,8 @@ export class FullBackComponent implements OnInit {
   }
 
   constructor(
-    private fullbackservice: FullbackServiceService
+    private fullbackservice: FullbackServiceService,
+    private delservice: DelService
   ) {
   }
 
@@ -73,5 +74,20 @@ export class FullBackComponent implements OnInit {
 
   select() {
     this.getdata();
+  }
+
+  /**
+   * 删除插件按钮
+   */
+  del(fullBackupId: string) {
+    this.delservice.delfullback(fullBackupId).subscribe(res => {
+      if (res.code === 0) {
+        alert('删除成功');
+      } else {
+        alert('删除失败');
+      }
+    }, err => {
+      console.log(err);
+    });
   }
 }

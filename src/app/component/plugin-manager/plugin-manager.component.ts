@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Page} from '../../entity/page';
 import {GetPluginService} from '../../service/getplugin/get-plugin.service';
-import {DelPluginService} from '../../service/delPluginService/del-plugin.service';
+import {DelService} from '../../service/delService/del.service';
 
 @Component({
   selector: 'app-plugin-manager',
@@ -16,7 +16,7 @@ export class PluginManagerComponent implements OnInit {
   // plugin: Plugin;
 
   constructor(private getplugin: GetPluginService,
-              private delplugin: DelPluginService) {
+              private delservice: DelService) {
   }
 
   ngOnInit() {
@@ -50,8 +50,8 @@ export class PluginManagerComponent implements OnInit {
   /**
    * 删除插件按钮
    */
-  del(pluginId: string) {
-    this.delplugin.delPlugin(pluginId).subscribe(res => {
+  del(pluginId: string, index: string) {
+    this.delservice.delPlugin(pluginId).subscribe(res => {
       if (res.code === 0) {
         alert('删除成功');
       }

@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DelPluginService } from './del-plugin.service';
+import { DelService } from './del.service';
 
-describe('DelPluginService', () => {
+describe('DelService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: DelPluginService = TestBed.get(DelPluginService);
+    const service: DelService = TestBed.get(DelService);
     expect(service).toBeTruthy();
   });
 });

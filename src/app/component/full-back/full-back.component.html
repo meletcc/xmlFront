@@ -21,7 +21,7 @@
     (ngModelChange)="onEndChange($event)"
     (nzOnOpenChange)="handleEndOpenChange($event)">
   </nz-date-picker>
-  <button nz-button nzType="primary" (click)="select()"><i nz-icon type="search" ></i>Search</button>
+  <button nz-button nzType="primary" (click)="select()"><i nz-icon type="search"></i>Search</button>
 </div>
 
 <br>
@@ -48,6 +48,8 @@
     <td>{{item.name}}</td>
     <td>
       <a href="">恢复</a>
+      <nz-divider nzType="vertical"></nz-divider>
+      <a href="javascript:void(0);" (click)="del(item.fullBackupId)">删除</a>
     </td>
   </tr>
   </tbody>

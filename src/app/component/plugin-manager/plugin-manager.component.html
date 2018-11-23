@@ -19,18 +19,20 @@
           [nzShowSizeChanger]="true" [nzBordered]="true">
   <thead>
   <tr>
+    <th>编号</th>
     <th>插件名</th>
+    <th>插件说明</th>
     <th>操作</th>
   </tr>
   </thead>
 
   <tbody>
-  <tr *ngFor="let item of basicTable.data">
+  <tr *ngFor="let item of basicTable.data let i=index">
     <td>{{item.pluginDescription}}</td>
     <td>
-      <a href="">执行</a>
-      <nz-divider nzType="vertical" routerLink="/plugin" (click)="toUsePluginPage(item)"></nz-divider>
-      <a href="javascript:void(0);" (click)="del(item.pluginId)">删除</a>
+      <a href="#" routerLink="/plugin" (click)="toUsePluginPage(item)">执行</a>
+      <nz-divider nzType="vertical"></nz-divider>
+      <a href="javascript:void(0);" (click)="del(item.pluginId,i)">删除</a>
     </td>
   </tr>
   </tbody>

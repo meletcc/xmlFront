@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {GetLogService} from '../../service/logService/get-log.service';
 import {Page} from '../../entity/page';
+import {DelService} from '../../service/delService/del.service';
 
 @Component({
   selector: 'app-log',
@@ -52,7 +53,8 @@ export class LogComponent implements OnInit {
   }
 
   constructor(
-    private getlog: GetLogService
+    private getlog: GetLogService,
+    private delservice: DelService
   ) {
   }
 
@@ -72,6 +74,21 @@ export class LogComponent implements OnInit {
   // 查询按钮
   select() {
     this.getdata();
+  }
+
+  /**
+   * 删除插件按钮
+   */
+  del(recordId: string) {
+    this.delservice.delRecord(recordId).subscribe(res => {
+      if (res.code === 0) {
+        alert('删除成功');
+      } else {
+        alert('删除失败');
+      }
+    }, err => {
+      console.log(err);
+    });
   }
 
 }
