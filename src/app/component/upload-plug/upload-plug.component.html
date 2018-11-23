@@ -1,32 +1,31 @@
+<h2>插件使用</h2>
+<hr>
 <!--<div class="container" style="margin-top: 70px">-->
- <!-- <div class="form-group">
-    <label>上传插件</label>
-    <input type="file" name="files" style="padding-top:3px;width: 22%;" #newFiles (change)="upload(newFiles)"
-           class="form-control"
-           value="选择文件">
-    &lt;!&ndash;<app-upfile (upfile)="upload($event)" [name]="'选择文件'"></app-upfile>&ndash;&gt;
-  </div>
-</div>-->
-<div class="container">
-  <div class="form-group">
-    <label style="font-size: 30px;">{{plugin.pluginDescription}}</label>
-  </div>
-  <div *ngIf="plugin">
-    <div *ngFor="let p of plugin.pluginParameterStr;let i = index;" class="form-group">
-      <label style="font-size: 16px;">{{p.description}}</label>
-      <input [type]="p.type" class="form-control" [name]="p.name" #newValue
-             (change)="changeParamterName(newValue.value,i)" style="width: 50%" placeholder="{{p.tips}}">
+  <!--<div class="form-group">-->
+    <!--<label>上传插件</label>-->
+    <!--<input type="file" name="files" style="padding-top:3px;width: 22%;" #newFiles (change)="upload(newFiles)"-->
+           <!--class="form-control"-->
+           <!--value="选择文件">-->
+    <!--&lt;!&ndash;<app-upfile (upfile)="upload($event)" [name]="'选择文件'"></app-upfile>&ndash;&gt;-->
+  <!--</div>-->
+<!--</div>-->
+<div class="container" style="margin-top: 10px;margin-left: -15px;">
+  <div *ngIf="params.length>0">
+    <div class="form-group">
+      <label style="font-size: 30px;">插件说明:{{plugin.pluginDescription}}</label>
     </div>
-    <input type="button" class="btn btn-default" style="margin-top: 10px;" value="执行插件" (click)="submit()">
+    <div style="margin-left: 100px;">
+      <div *ngFor="let p of params  ;let i = index;" class="form-group">
+        <label style="font-size: 16px;">{{p.description}}</label>
+        <input [type]="p.type" class="form-control" [name]="p.name" #newValue
+               (change)="changeParamterName(newValue.value,i)" style="width: 50%" placeholder="{{p.tips}}">
+      </div>
+      <input type="button" class="btn btn-default" style="margin-top: 10px;" value="执行插件" (click)="submit()">
+    </div>
+  </div>
+  <div *ngIf="params.length==0" style="text-align: center">
+    <a href="#" routerLink="/pluginManager" style="color: red;font-size: 20px;">插件参数错误，请返回插件管理界面</a>
   </div>
 </div>
-<!--<nz-date-picker-->
-<!--[nzDisabledDate]="disabledStartDate"-->
-<!--nzShowTime-->
-<!--nzFormat="yyyy-MM-dd HH:mm:ss"-->
-<!--[(ngModel)]="startValue"-->
-<!--nzPlaceHolder="Start"-->
-<!--(ngModelChange)="onStartChange($event)"-->
-<!--(nzOnOpenChange)="handleStartOpenChange($event)">-->
-<!--</nz-date-picker>-->
+
 

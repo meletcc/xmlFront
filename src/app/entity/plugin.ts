@@ -20,7 +20,7 @@ export class Plugin {
   /**
    * 插件参数{JSON格式}
    */
-  pluginParameterStr: Array<Parameters>;
+  pluginParameterStr: string;
   /**
    * 所属用户
    */
@@ -30,12 +30,12 @@ export class Plugin {
     pluginDescription?: string,
     pluginBody?: string,
     pluginBack?: string,
-    pluginParameterStr?: Array<Parameters>;
+    pluginParameterStr?: string;
   } = {}) {
     this.pluginDescription = ops.pluginDescription || '';
     this.pluginBody = ops.pluginBody || '';
     this.pluginBack = ops.pluginBack || '';
-    this.pluginParameterStr = ops.pluginParameterStr || [];
+    this.pluginParameterStr = ops.pluginParameterStr || '';
   }
 
 }

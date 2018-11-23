@@ -53,14 +53,6 @@ export class ContactListComponent implements OnInit {
     }
 
 
-    // p2 = p2.filter(value => value == '#{name}');
-    // if (p2 != null) {
-    //   if (p1 == null) {
-    //     this.msg = '定义备份之前，请先定义好插件代码！';
-    //     return;
-    //   }
-    // }
-    // value == '#{name}'返回位true表式 通過
     if (p1 != null) {
       p1.forEach(value => {
         temp.push(value);
@@ -135,6 +127,7 @@ export class ContactListComponent implements OnInit {
     }
 
     this.plugin.pluginParameterStr = JSON.stringify(this.parameters);
+    console.log(this.plugin);
     this.http.post('/plugin/make', this.plugin, {responseType: 'blob'}).subscribe(data => {
       const link = document.createElement('a');
       const blob = new Blob([data], {type: 'application/text'});
