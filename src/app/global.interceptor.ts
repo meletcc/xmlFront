@@ -14,10 +14,10 @@ export class GlobalInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // 把所有请求头更改
     // 如果是用户登录或者注册忽略检查token
-    // if (req.url.includes('login')) {
+    if (req.url.includes('login')) {
       return next.handle(req);
- /*   }
+    }
     const authReq = req.clone({setHeaders: {'authorization': window.sessionStorage.getItem('auto_token')}});
-    return next.handle(authReq);*/
+    return next.handle(authReq);
   }
 }
