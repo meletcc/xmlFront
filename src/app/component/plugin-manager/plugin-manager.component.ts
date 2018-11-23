@@ -98,7 +98,7 @@ export class PluginManagerComponent implements OnInit {
    */
   del(pluginId: string, index: string) {
     this.delservice.delPlugin(pluginId).subscribe(res => {
-      if (res.code === 0) {
+      if (res.code === 0 && confirm("确认删除？")) {
         alert('删除成功');
       }
       else {

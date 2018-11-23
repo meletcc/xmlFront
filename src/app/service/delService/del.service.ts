@@ -24,11 +24,4 @@ export class DelService {
       .set('fullBackupId', fullBackupId.toString());
     return this.http.post('/fullBackup/del', params);
   }
-
-  // 删除日志
-  delRecord(recordId: string): any {
-    const params = new HttpParams()
-      .set('recordId', recordId.toString());
-    return this.http.post('/record/del', params);
-  }
 }

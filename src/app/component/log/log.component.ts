@@ -75,20 +75,4 @@ export class LogComponent implements OnInit {
   select() {
     this.getdata();
   }
-
-  /**
-   * 删除插件按钮
-   */
-  del(recordId: string) {
-    this.delservice.delRecord(recordId).subscribe(res => {
-      if (res.code === 0) {
-        alert('删除成功');
-      } else {
-        alert('删除失败');
-      }
-    }, err => {
-      console.log(err);
-    });
-  }
-
 }
