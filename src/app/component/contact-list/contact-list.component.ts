@@ -104,6 +104,10 @@ export class ContactListComponent implements OnInit {
   //保存插件
   savePlugIn(): void {
     //to do service
+    if (this.plugin.pluginName == '') {
+      this.msg = '插件名不能为空值！';
+      return;
+    }
     if (this.plugin.pluginDescription == '') {
       this.msg = '插件说明不能为空值！';
       return;
@@ -174,6 +178,12 @@ export class Plugins {
    * 插件id
    */
   pluginId: String;
+
+  /**
+   * 插件名称
+   */
+  pluginName: string;
+
   /**
    * 参数功能说明
    */
@@ -197,14 +207,15 @@ export class Plugins {
 
   constructor(ops: {
     pluginDescription?: string,
+    pluginName?: string,
     pluginBody?: string,
     pluginBack?: string,
     pluginParameterStr?: string;
   } = {}) {
     this.pluginDescription = ops.pluginDescription || '';
+    this.pluginName = ops.pluginName || '';
     this.pluginBody = ops.pluginBody || '';
     this.pluginBack = ops.pluginBack || '';
     this.pluginParameterStr = ops.pluginParameterStr || '';
   }
-
 }

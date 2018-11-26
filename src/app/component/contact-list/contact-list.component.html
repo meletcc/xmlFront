@@ -2,14 +2,19 @@
 <hr>
 <div class="container" style="margin-top: 10px;margin-left: -15px; ">
   <div class="form-group">
-    <label style="font-size:18px;">插件说明</label>
+    <label style="font-size:18px;">插件名</label>
+    <input type="text" class="form-control" [(ngModel)]="plugin.pluginName" name="pluginName"
+           placeholder="请输入插件名">
+  </div>
+  <div class="form-group">
+    <label style="font-size:18px;">插件说明<span style="font-size: 12px;color: red;">&nbsp;温馨提示,修改主体代码或者备份代码，参数数据会被重置</span></label>
     <input type="text" class="form-control" [(ngModel)]="plugin.pluginDescription" name="description"
-           placeholder="插件说明">
+           placeholder="请输入插件说明">
   </div>
   <div class="form-group">
     <label style="font-size:18px;">插件代码</label>
     <textarea class="form-control" [(ngModel)]="plugin.pluginBody" name="body" (change)="acquireSql()"
-              placeholder="自定义sql 格式为 update set prama1=#{param1}  prama2=#{param2} where param3=#{param3}">
+              placeholder="自定义插件主题 格式为 update set prama1=#{param1}  prama2=#{param2} where param3=#{param3} or ">
       </textarea>
   </div>
   <div class="form-group">
@@ -20,10 +25,9 @@
     <div class="form-group">
       <label>备份</label>
       <input type="text" class="form-control" [(ngModel)]="plugin.pluginBack" name="back" (change)="acquireSql()"
-             placeholder="备份">
+             placeholder="请输入备份">
     </div>
   </div>
-
   <div *ngIf="parameters">
     <div class="row" style="margin-top: 15px;text-align: center" *ngFor="let parameter of parameters">
       <div class="col-md-2" style="display: flex;">
@@ -40,13 +44,13 @@
         </select>
       </div>
       <div class="col-md-3" style="display: flex;">
-        <label class="label-style">提示:</label>
-        <input type="text" [(ngModel)]="parameter.tips" class="form-control" name="pTips" placeholder="请输入提示">
+        <label class="label-style">参数名:</label>
+        <input type="text" [(ngModel)]="parameter.tips" class="form-control" name="pTips" placeholder="请输入参数名称">
       </div>
-      <div class="col-md-5" style="display: flex;">
-        <label class="label-style">说明:</label>
+      <div class="col-md-4" style="display: flex;">
+        <label class="label-style">提示:</label>
         <input type="text" [(ngModel)]="parameter.description" class="form-control" name="pDescription"
-               placeholder="请输入参数说明">
+               placeholder="请输入参数输入提示">
       </div>
     </div>
 

@@ -48,6 +48,7 @@ export class PluginManagerComponent implements OnInit {
         let a: Response = event.body as Response;
         if (a.code != '-1') {
           alert(a.msg);
+          this.getdata();
         } else {
           alert('上传插件失败');
         }
@@ -100,8 +101,8 @@ export class PluginManagerComponent implements OnInit {
     this.delservice.delPlugin(pluginId).subscribe(res => {
       if (res.code === 0) {
         alert('删除成功');
-      }
-      else {
+        this.getdata();
+      } else {
         alert('删除失败');
       }
     }, err => {

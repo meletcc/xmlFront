@@ -40,37 +40,13 @@ export class UploadPlugComponent implements OnInit {
     }
   }
 
-  // upload(files) {
-  //   console.log(files);
-  //   this.opmEntity = null;
-  //   const formData = new FormData();
-  //   // formData.append('opm', files.files[0]);
-  //   formData.append('opm', files);
-  //   return this.client.post<Response>('/anaOpm', formData, {headers: this.headerUp}).toPromise().then((response) => {
-  //     console.log(response.code);
-  //     if (response.code === -1) {
-  //       alert(response.msg);
-  //     } else {
-  //       this.opmEntity = response.data;
-  //     }
-  //   });
-  // }
-
   upload(files): any {
-    // this.opmEntity = null;
     const formData = new FormData();
     formData.append('opm', files.files[0]);
     console.log(files.files[0]);
-    // return this.client.post<Response>('/plugin/anaOpm', formData, {headers: this.headerUp}).toPromise().then((response) => {
-    //   if (response.code === -1) {
-    //     alert(response.msg);
-    //   } else {
-    //     this.opmEntity = response.data;
-    //   }
-    // });
   }
 
-  changeParamterName(newValue, index): any {
+  changeParameterName(newValue, index): any {
     this.values[index] = newValue;
   }
 
@@ -88,7 +64,7 @@ export class UploadPlugComponent implements OnInit {
 
     this.plugin.pluginBody = sql;
 
-    if (this.plugin.pluginBack !== '') {
+    if (this.plugin.pluginBack != null) {
       let back: string = this.plugin.pluginBack;
       let regex4 = /\#{(.+?)\}/g;
       let p = this.plugin.pluginBack.match(regex4);
@@ -109,8 +85,6 @@ export class UploadPlugComponent implements OnInit {
     this.client.post<any>('/plugin/run', this.plugin).toPromise().then((value) => {
       if (value.code === -1) {
         alert(value.msg);
-        window.sessionStorage.removeItem('auto_token');
-        this.router.navigate(['/signin']);
       } else {
         alert(value.msg);
       }

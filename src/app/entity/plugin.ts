@@ -5,6 +5,12 @@ export class Plugin {
    * 插件id
    */
   pluginId: string;
+
+  /**
+   * 插件名称
+   */
+  pluginName: string;
+
   /**
    * 参数功能说明
    */
@@ -28,11 +34,13 @@ export class Plugin {
 
   constructor(ops: {
     pluginDescription?: string,
+    pluginName?: string,
     pluginBody?: string,
     pluginBack?: string,
     pluginParameterStr?: string;
   } = {}) {
     this.pluginDescription = ops.pluginDescription || '';
+    this.pluginName = ops.pluginName || '';
     this.pluginBody = ops.pluginBody || '';
     this.pluginBack = ops.pluginBack || '';
     this.pluginParameterStr = ops.pluginParameterStr || '';
