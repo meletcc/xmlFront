@@ -1,20 +1,22 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-// 登录模块
+// 登录
 import {SigninComponent} from './component/signin/signin.component';
-// 注册模块
+// 注册
 import {SignupComponent} from './component/signup/signup.component';
 // 布局模块
 import {LayoutComponent} from './component/layout/layout.component';
-// 插件模块
+// 制作插件
 import {ContactListComponent} from './component/contact-list/contact-list.component';
 // 路由拦截
 import {AuthGuard} from './auth.guard';
-// 日志模块
+// 日志
 import {LogComponent} from './component/log/log.component';
-// 全量备份模块
+// 全量备份
 import {FullBackComponent} from './component/full-back/full-back.component';
+// 上传插件
 import {UploadPlugComponent} from './component/upload-plug/upload-plug.component';
+// 插件管理
 import {PluginManagerComponent} from './component/plugin-manager/plugin-manager.component';
 
 // 1.路由模块初始化
@@ -26,7 +28,7 @@ const routers: Routes = [
   // 默认地址
   {
     path: '',
-    redirectTo: '/contactList', // 根路径跳转，自动先渲染 layout组件 然后再渲染 layout组件 下面的路由出口
+    redirectTo: '/contactList', // 根路径跳转到制作插件页面，然后请求拦截
     pathMatch: 'full' // 必须完全匹配路径的时候才做重定向
   },
   {
@@ -97,9 +99,10 @@ const routers: Routes = [
 
 @NgModule({
   imports: [
-    // 路由模块导入路由表
+    // 路由模块导入上面配置的路由表
     RouterModule.forRoot(routers)
   ],
+  // 暴露该路由模块
   exports: [
     RouterModule
   ]

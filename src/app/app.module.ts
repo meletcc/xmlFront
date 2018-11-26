@@ -13,7 +13,7 @@ import {UploadPlugComponent} from './component/upload-plug/upload-plug.component
 import {FormsModule} from '@angular/forms';
 // 引入http模型
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-// 引入 拦截器
+// 引入 自己的拦截器
 import {GlobalInterceptor} from './global.interceptor';
 /** 配置 angular i18n **/
 import {HashLocationStrategy, LocationStrategy, registerLocaleData} from '@angular/common';
@@ -27,13 +27,15 @@ import {FullbackServiceService} from './service/fullbackService/fullback-service
 import {NgZorroAntdModule, NZ_I18N, zh_CN} from 'ng-zorro-antd';
 import zh from '@angular/common/locales/zh';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { PluginManagerComponent } from './component/plugin-manager/plugin-manager.component';
+import {PluginManagerComponent} from './component/plugin-manager/plugin-manager.component';
+import {DelService} from './service/delService/del.service';
+import {GetPluginService} from './service/getplugin/get-plugin.service';
 
 registerLocaleData(zh);
 
 // 可以写多个拦截器
 export const httpInterceptorProviders = [
-  {provide: HTTP_INTERCEPTORS, useClass: GlobalInterceptor, multi: true},
+  {provide: HTTP_INTERCEPTORS, useClass: GlobalInterceptor, multi: true}
 ];
 
 @NgModule({
@@ -52,6 +54,7 @@ export const httpInterceptorProviders = [
     UploadPlugComponent,
     PluginManagerComponent
   ],
+  // 导入模块
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -62,13 +65,15 @@ export const httpInterceptorProviders = [
   ],
   providers: [
     httpInterceptorProviders,
+    LoginService,
+    GetLogService,
+    GetPluginService,
+    FullbackServiceService,
+    DelService,
     {
       provide: LocationStrategy,
       useClass: HashLocationStrategy
     },
-    LoginService,
-    GetLogService,
-    FullbackServiceService,
     /** 配置 ng-zorro-antd 国际化 **/
     {provide: NZ_I18N, useValue: zh_CN}
   ],
