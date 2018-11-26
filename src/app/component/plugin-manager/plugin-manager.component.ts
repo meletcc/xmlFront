@@ -18,7 +18,9 @@ export class PluginManagerComponent implements OnInit {
     'enctype': 'multipart/form-data'
   });
 
-  page: Page;
+  total: number;
+  pageNum: number;
+  pageSize: number;
 
   records: Array<Plugin>;
 
@@ -69,7 +71,8 @@ export class PluginManagerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.page = new Page();
+    this.pageSize = 1;
+    this.pageNum = 1;
     this.getdata();
   }
 
@@ -99,7 +102,7 @@ export class PluginManagerComponent implements OnInit {
    */
   del(pluginId: string, index: string) {
     this.delservice.delPlugin(pluginId).subscribe(res => {
-      if (res.code === 0 && confirm("确认删除？")) {
+      if (res.code === 0 && confirm('确认删除？')) {
         alert('删除成功');
         this.getdata();
       } else {
@@ -115,11 +118,10 @@ export class PluginManagerComponent implements OnInit {
    * 获取插件实体数据
    */
   getdata() {
-    this.getplugin.getPlugin(this.page.currentPage, this.page.currtNum).subscribe(res => {
+    this.getplugin.getPlugin(this.pageNum, this.pageSize).subscribe(res => {
       // 获取数据
-      this.records = res.rows;
-      console.log(res.rows);
-      console.log(this.records);
+      this.Pages(res);
+
     });
   }
 
@@ -127,46 +129,11 @@ export class PluginManagerComponent implements OnInit {
   select() {
     this.getdata();
   }
+
+  Pages(res) {
+    this.pageNum = res.pageNum;
+    this.pageSize = res.pageSize;
+    this.total = res.total;
+    this.records = res.rows;
+  }
 }
-
-// export class Response {
-//   code: number;
-//   data: Plugin;
-//   msg: string;
-//
-//   constructor(opts: {
-//     code?: number,
-//     data?: Plugin,
-//     msg?: string
-//   } = {}) {
-//     this.code = opts.code;
-//     this.data = opts.data;
-//     this.msg = opts.msg;
-//   }
-// }
-
-// /**
-//  * 参数说明
-//  */
-// export class Parameters {
-//
-//   name: string;
-//   description: string;
-//   type: string;
-//   tips: string;
-//   value: string;
-//
-//   constructor(ops: {
-//     description?: string,
-//     name?: string,
-//     type?: string,
-//     tips?: string,
-//     value?: string
-//   } = {}) {
-//     this.description = ops.description;
-//     this.name = ops.name || '';
-//     this.type = ops.type || '';
-//     this.tips = ops.tips || '';
-//     this.value = ops.value || '';
-//   }
-// }
