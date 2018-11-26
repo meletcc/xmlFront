@@ -12,7 +12,7 @@ export class LogComponent implements OnInit {
 
   page: Page;
 
-  records: Array<any>; // 日志记录
+  records: Array<Records>; // 日志记录，对象集合
 
   startValue: Date; // 开始时间
 
@@ -72,7 +72,7 @@ export class LogComponent implements OnInit {
   }
 
   constructor(
-    private getlog: GetLogService
+    private getlogservice: GetLogService
   ) {
   }
 
@@ -81,11 +81,13 @@ export class LogComponent implements OnInit {
     this.getdata();
   }
 
+  /**
+   * 获取日志记录数据
+   */
   getdata() {
-    this.getlog.getLog(this.page.currentPage, this.page.currtNum, this.startValue, this.endValue)
+    this.getlogservice.getLog(this.page.currentPage, this.page.currtNum, this.startValue, this.endValue)
       .subscribe(res => {
         // 获取数据
-        // console.log(res);
         this.records = res.rows;
       });
   }

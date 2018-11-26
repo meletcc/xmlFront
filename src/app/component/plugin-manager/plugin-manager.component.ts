@@ -3,9 +3,8 @@ import {Page} from '../../entity/page';
 import {GetPluginService} from '../../service/getplugin/get-plugin.service';
 import {DelService} from '../../service/delService/del.service';
 import {HttpClient, HttpEvent, HttpEventType, HttpHeaders, HttpRequest, HttpResponse} from '@angular/common/http';
-import {NzMessageService, UploadXHRArgs} from 'ng-zorro-antd';
+import {NzMessageService, UploadFile, UploadFilter, UploadXHRArgs} from 'ng-zorro-antd';
 import {Response} from '../../entity/Response';
-import {Plugin} from '../../entity/plugin';
 
 @Component({
   selector: 'app-plugin-manager',
@@ -62,13 +61,31 @@ export class PluginManagerComponent implements OnInit {
   };
 
   constructor(private getplugin: GetPluginService,
-              private delservice: DelService, private client: HttpClient) {
+              private delservice: DelService, private client: HttpClient, private msg: NzMessageService) {
+    // this.headerUp = new HttpHeaders({
+    //   'Authorization': 'my-auth-token',
+    //   'enctype': 'multipart/form-data'
+    // });
   }
 
   ngOnInit() {
     this.page = new Page();
     this.getdata();
   }
+
+  //上传文件
+  // upload(files): any {
+  //   this.plugin = null;
+  //   const formData = new FormData();
+  //   formData.append('opm', files.files[0]);
+  //   return this.client.post<any>('/plugin/anaOpm', formData, {headers: this.headerUp}).toPromise().then((response) => {
+  //     if (response.code === -1) {
+  //       alert(response.msg);
+  //     } else {
+  //       alert('上传插件成功');
+  //     }
+  //   });
+  // }
 
   /**
    *  跳转插件使用界面
@@ -82,7 +99,7 @@ export class PluginManagerComponent implements OnInit {
    */
   del(pluginId: string, index: string) {
     this.delservice.delPlugin(pluginId).subscribe(res => {
-      if (res.code === 0 && confirm('确认删除？')) {
+      if (res.code === 0 && confirm("确认删除？")) {
         alert('删除成功');
         this.getdata();
       } else {
@@ -100,7 +117,7 @@ export class PluginManagerComponent implements OnInit {
   getdata() {
     this.getplugin.getPlugin(this.page.currentPage, this.page.currtNum).subscribe(res => {
       // 获取数据
-      this.records = res;
+      this.records = res.rows;
       console.log(res.rows);
       console.log(this.records);
     });
@@ -111,3 +128,45 @@ export class PluginManagerComponent implements OnInit {
     this.getdata();
   }
 }
+
+// export class Response {
+//   code: number;
+//   data: Plugin;
+//   msg: string;
+//
+//   constructor(opts: {
+//     code?: number,
+//     data?: Plugin,
+//     msg?: string
+//   } = {}) {
+//     this.code = opts.code;
+//     this.data = opts.data;
+//     this.msg = opts.msg;
+//   }
+// }
+
+// /**
+//  * 参数说明
+//  */
+// export class Parameters {
+//
+//   name: string;
+//   description: string;
+//   type: string;
+//   tips: string;
+//   value: string;
+//
+//   constructor(ops: {
+//     description?: string,
+//     name?: string,
+//     type?: string,
+//     tips?: string,
+//     value?: string
+//   } = {}) {
+//     this.description = ops.description;
+//     this.name = ops.name || '';
+//     this.type = ops.type || '';
+//     this.tips = ops.tips || '';
+//     this.value = ops.value || '';
+//   }
+// }

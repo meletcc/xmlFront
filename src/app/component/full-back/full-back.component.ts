@@ -10,10 +10,15 @@ import {Page} from '../../entity/page';
 export class FullBackComponent implements OnInit {
 
   page: Page;
+
   records: Array<any>;
+
   startValue: Date;
+
   endValue: Date;
+
   endOpen = false;
+
 
   disabledStartDate = (startValue: Date): boolean => {
     if (!startValue || !this.endValue) {
@@ -60,13 +65,14 @@ export class FullBackComponent implements OnInit {
   }
 
   getdata() {
-    this.fullbackservice.getLog(this.page.currentPage, this.page.currtNum, this.startValue, this.endValue).subscribe(res => {
-      this.records = res.rows;
-      // this.page.totleNum = res.total;
-      // this.page.pageCount = Math.ceil(res['total'] / this.page.currtNum);
-      // this.page.startNum = ((this.page.currentPage - 1) * this.page.currtNum) + 1;
-      // this.page.getCurrtNum = this.page.startNum - 1 + res.rows.length;
-    });
+    this.fullbackservice.getLog(this.page.currentPage, this.page.currtNum, this.startValue, this.endValue)
+      .subscribe(res => {
+        this.records = res.rows;
+        // this.page.totleNum = res.total;
+        // this.page.pageCount = Math.ceil(res['total'] / this.page.currtNum);
+        // this.page.startNum = ((this.page.currentPage - 1) * this.page.currtNum) + 1;
+        // this.page.getCurrtNum = this.page.startNum - 1 + res.rows.length;
+      });
   }
 
   select() {
@@ -74,7 +80,7 @@ export class FullBackComponent implements OnInit {
   }
 
   /**
-   * 删除插件按钮
+   * 删除按钮
    */
   // del(fullBackupId: string) {
   //   this.delservice.delfullback(fullBackupId).subscribe(res => {

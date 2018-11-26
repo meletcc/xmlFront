@@ -14,12 +14,12 @@
   <div class="form-group">
     <label style="font-size:18px;">插件代码</label>
     <textarea class="form-control" [(ngModel)]="plugin.pluginBody" name="body" (change)="acquireSql()"
-              placeholder="自定义插件主题 格式为 update set prama1=#{param1}  prama2=#{param2} where param3=#{param3} or ">
+              placeholder="自定义插件主题 格式为 update set prama1=#{param1}  prama2=#{param2} where param3=#{param3}">
       </textarea>
   </div>
   <div class="form-group">
     <input type="checkbox" (click)="backUp()" id="isBackUp">
-    <label style="margin-left: 10px;font-size: 18px;" for="isBackUp">是否备份</label>
+    <label style="margin-left: 10px;font-size: 14px;" for="isBackUp">是否备份</label>
   </div>
   <div *ngIf="isBackup">
     <div class="form-group">
