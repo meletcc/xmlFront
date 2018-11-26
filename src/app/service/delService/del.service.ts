@@ -19,9 +19,9 @@ export class DelService {
   }
 
   // 删除全量备份
-  delfullback(fullBackupId: string): any {
-    const params = new HttpParams()
-      .set('fullBackupId', fullBackupId.toString());
-    return this.http.post('/fullBackup/del', params);
-  }
+  // delfullback(fullBackupId: string): any {
+  //   const params = new HttpParams()
+  //     .set('fullBackupId', fullBackupId.toString());
+  //   return this.http.post('/fullBackup/del', params);
+  // }
 }

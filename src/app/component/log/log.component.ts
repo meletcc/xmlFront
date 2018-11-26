@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {GetLogService} from '../../service/logService/get-log.service';
 import {Page} from '../../entity/page';
-import {DelService} from '../../service/delService/del.service';
+import {Records} from '../../entity/records';
 
 @Component({
   selector: 'app-log',
@@ -11,12 +11,31 @@ import {DelService} from '../../service/delService/del.service';
 export class LogComponent implements OnInit {
 
   page: Page;
-  records: Array<any>;
+
+  records: Array<any>; // 日志记录
 
   startValue: Date; // 开始时间
+
   endValue: Date; // 结束时间
+
   endOpen = false;
 
+  isVisible = false;
+
+  currentItem: Records;
+
+  showModal(item: Records): void {
+    this.isVisible = true;
+    this.currentItem = item;
+  }
+
+  handleOk(): void {
+    this.isVisible = false;
+  }
+
+  handleCancel(): void {
+    this.isVisible = false;
+  }
 
   disabledStartDate = (startValue: Date): boolean => {
     if (!startValue || !this.endValue) {
@@ -53,8 +72,7 @@ export class LogComponent implements OnInit {
   }
 
   constructor(
-    private getlog: GetLogService,
-    private delservice: DelService
+    private getlog: GetLogService
   ) {
   }
 
@@ -64,11 +82,12 @@ export class LogComponent implements OnInit {
   }
 
   getdata() {
-    this.getlog.getLog(this.page.currentPage, this.page.currtNum, this.startValue, this.endValue).subscribe(res => {
-      // 获取数据
-      console.log(res);
-      this.records = res.rows;
-    });
+    this.getlog.getLog(this.page.currentPage, this.page.currtNum, this.startValue, this.endValue)
+      .subscribe(res => {
+        // 获取数据
+        // console.log(res);
+        this.records = res.rows;
+      });
   }
 
   // 查询按钮

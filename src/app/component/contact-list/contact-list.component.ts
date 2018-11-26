@@ -88,6 +88,7 @@ export class ContactListComponent implements OnInit {
 
   //取消或者保存备份
   backUp(): void {
+
     if (this.isBackup) {
       this.plugin.pluginBack = '';
       this.acquireSql();

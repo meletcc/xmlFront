@@ -1,6 +1,5 @@
-<h2 xmlns="">日志记录</h2>
+<h2>日志记录</h2>
 <hr>
-
 <div>
   <nz-date-picker
     [nzDisabledDate]="disabledStartDate"
@@ -10,8 +9,7 @@
     nzPlaceHolder="Start"
     (ngModelChange)="onStartChange($event)"
     (nzOnOpenChange)="handleStartOpenChange($event)">
-  </nz-date-picker>
-
+  </nz-date-picker>&nbsp;&nbsp;
   <nz-date-picker
     [nzDisabledDate]="disabledEndDate"
     nzShowTime
@@ -21,39 +19,57 @@
     [nzOpen]="endOpen"
     (ngModelChange)="onEndChange($event)"
     (nzOnOpenChange)="handleEndOpenChange($event)">
-  </nz-date-picker>
+  </nz-date-picker>&nbsp;&nbsp;
   <button nz-button nzType="primary" (click)="select()"><i nz-icon type="search"></i>Search</button>
 </div>
-
 <br>
 
 <nz-table #basicTable [nzData]="records" [nzPageIndex]="1" [nzPageSize]="10" [nzScroll] [nzShowQuickJumper]="true"
           [nzShowSizeChanger]="true" [nzBordered]="true">
   <thead>
   <tr>
-    <!--<th>编号</th>-->
-    <th>sql</th>
-    <th>说明</th>
+    <th>编号</th>
     <th>时间</th>
-    <th>用户编号</th>
-    <th>备份主体</th>
+    <th>插件名称</th>
+    <th>说明</th>
     <th>操作</th>
   </tr>
   </thead>
   <tbody>
-
-  <tr *ngFor="let item of basicTable.data">
-    <!--<td>{{item.recordId}}</td>-->
-    <td>{{item.recordBody}}</td>
-    <td>{{item.recordDescription}}</td>
+  <tr *ngFor="let item of basicTable.data; let i = index;">
+    <td>{{i+1}}</td>
     <td>{{item.recordDate}}</td>
-    <td>{{item.userId}}</td>
-    <td>{{item.recordBackup}}</td>
+    <td>{{item.pluginName}}</td>
+    <td>{{item.recordDescription}}</td>
     <td>
-      <a href="#">查看</a>
+      <a href=javascript:void(0); (click)="showModal(item)">详情</a>
       <nz-divider nzType="vertical"></nz-divider>
-      <a href="#">恢复</a>
+      <a href="javascript:void(0);">恢复</a>
     </td>
   </tr>
   </tbody>
 </nz-table>
+
+<!--模态页面-->
+<nz-modal [(nzVisible)]="isVisible" nzTitle="日志详情" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" nzWidth="1400px">
+  <div *ngIf="currentItem">
+    <nz-table #basicTable [nzBordered]="true">
+      <thead>
+        <tr>
+          <th>记录主体</th>
+          <th>备份主体</th>
+          <th>用户ID</th>
+          <th>用户名</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{currentItem.recordBody}}</td>
+          <td>{{currentItem.recordBackup}}</td>
+          <td>{{currentItem.userId}}</td>
+          <td>{{currentItem.name}}</td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</nz-modal>

@@ -27,8 +27,8 @@ export class NavbarComponent implements OnInit {
   signout() {
     if (confirm('确认退出？')) {
       window.sessionStorage.removeItem('auto_token');
+      // navigate 导航
       this.router.navigate(['/signin']);
     }
   }
-
 }

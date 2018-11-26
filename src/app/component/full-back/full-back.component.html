@@ -9,8 +9,7 @@
     nzPlaceHolder="Start"
     (ngModelChange)="onStartChange($event)"
     (nzOnOpenChange)="handleStartOpenChange($event)">
-  </nz-date-picker>
-
+  </nz-date-picker>&nbsp;&nbsp;
   <nz-date-picker
     [nzDisabledDate]="disabledEndDate"
     nzShowTime
@@ -20,10 +19,9 @@
     [nzOpen]="endOpen"
     (ngModelChange)="onEndChange($event)"
     (nzOnOpenChange)="handleEndOpenChange($event)">
-  </nz-date-picker>
+  </nz-date-picker>&nbsp;&nbsp;
   <button nz-button nzType="primary" (click)="select()"><i nz-icon type="search"></i>Search</button>
 </div>
-
 <br>
 
 <nz-table #basicTable [nzData]="records" [nzPageIndex]="1" [nzPageSize]="10" [nzScroll] [nzShowQuickJumper]="true"
@@ -40,16 +38,14 @@
   </thead>
   <tbody>
 
-  <tr *ngFor="let item of basicTable.data">
-    <td>{{item.fullBackupId}}</td>
+  <tr *ngFor="let item of basicTable.data; let i = index;">
+    <td>{{i+1}}</td>
     <td>{{item.fullBackupDate}}</td>
     <td>{{item.fullBackupUserId}}</td>
     <td>{{item.fullBackupFilePath}}</td>
     <td>{{item.name}}</td>
     <td>
-      <a href="">恢复</a>
-      <nz-divider nzType="vertical"></nz-divider>
-      <a href="javascript:void(0);" (click)="del(item.fullBackupId)">删除</a>
+      <a href="javascript:void(0);">恢复</a>
     </td>
   </tr>
   </tbody>
@@ -57,5 +53,3 @@
 
 <!--翻页组件-->
 <!--<app-paging [page]="page" (getdata)="getdata()" [countArr]="[1,2,3,4]"></app-paging>-->
-
-

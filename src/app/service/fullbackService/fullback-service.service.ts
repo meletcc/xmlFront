@@ -20,8 +20,8 @@ export class FullbackServiceService {
     const params = new HttpParams()
       .set('pageNum', pageNum.toString())
       .set('pageSize', pageSize.toString())
-      .set('startDate', this.datePipe.transform(startDate, "yyyy-MM-dd HH:mm:ss"))
-      .set('endDate', this.datePipe.transform(endDate, "yyyy-MM-dd HH:mm:ss"));
+      .set('startDate', this.datePipe.transform(startDate, 'yyyy-MM-dd HH:mm:ss'))
+      .set('endDate', this.datePipe.transform(endDate, 'yyyy-MM-dd HH:mm:ss'));
     return this.http.post(this.baseurl + '/list', params);
   }
 }

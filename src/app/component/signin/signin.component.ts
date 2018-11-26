@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {LoginService} from '../../service/loginService/login.service';
 
@@ -16,7 +15,7 @@ export class SigninComponent implements OnInit {
 
   error_msg = '';
 
-  constructor(private loginSvr: LoginService, private router: Router, private http: HttpClient) {
+  constructor(private loginSvr: LoginService, private router: Router) {
   }
 
   ngOnInit() {
@@ -25,6 +24,7 @@ export class SigninComponent implements OnInit {
   // 提交登录表单
   signinSub() {
     this.loginSvr.login(this.signinForm.name, this.signinForm.pwd)
+    // 订阅服务器返回状态
       .subscribe((data: any) => {
         if (data.code === 0) {
           // 状态码为 0 表示登录成功，把 token 共享出去
@@ -40,5 +40,4 @@ export class SigninComponent implements OnInit {
         console.log(err);
       });
   }
-
 }
