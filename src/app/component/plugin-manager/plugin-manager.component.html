@@ -1,15 +1,13 @@
 <h2 xmlns="">插件管理</h2>
 <hr>
 <div style="display: flex;flex-wrap: nowrap;height: 60px;">
-
   <div style="width: 15%">
-    <nz-upload nzAction="/plugin/anaPlugin" [nzCustomRequest]="customReq">
+    <nz-upload nzAction="/plugin/anaPlugin" [nzCustomRequest]="customReq" [nzHeaders]="headerUp">
       <button nz-button>
         <i nz-icon type="upload"></i><span>上传本地插件</span>
       </button>
     </nz-upload>
   </div>
-
   <div style="width: 20%">
     <nz-input-group nzSearch [nzSuffix]="suffixIconButton">
       <input type="text" nz-input placeholder="请输入插件名">

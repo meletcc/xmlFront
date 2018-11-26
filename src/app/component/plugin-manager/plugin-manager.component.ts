@@ -13,10 +13,10 @@ import {Response} from '../../entity/Response';
 })
 export class PluginManagerComponent implements OnInit {
 
-  /*headerUp: HttpHeaders = new HttpHeaders({
+  headerUp: HttpHeaders = new HttpHeaders({
     'Authorization': 'my-auth-token',
     'enctype': 'multipart/form-data'
-  });*/
+  });
 
   page: Page;
 
@@ -31,8 +31,8 @@ export class PluginManagerComponent implements OnInit {
     formData.append('plugin', item.file as any);
     const req = new HttpRequest('POST', item.action, formData, {
       reportProgress: true,
-      withCredentials: true
-      // headers: this.headerUp
+      withCredentials: true,
+      headers: this.headerUp
     });
     // 始终返回一个 `Subscription` 对象，nz-upload 会在适当时机自动取消订阅
     return this.client.request(req).subscribe((event: HttpEvent<{}>) => {
