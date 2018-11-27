@@ -10,7 +10,11 @@ import {Records} from '../../entity/records';
 })
 export class LogComponent implements OnInit {
 
-  page: Page;
+  total: number;
+
+  pageNum: number;
+
+  pageSize: number;
 
   records: Array<Records>; // 日志记录，对象集合
 
@@ -77,7 +81,8 @@ export class LogComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.page = new Page();
+    this.pageSize = 10;
+    this.pageNum = 1;
     this.getdata();
   }
 
@@ -85,15 +90,22 @@ export class LogComponent implements OnInit {
    * 获取日志记录数据
    */
   getdata() {
-    this.getlogservice.getLog(this.page.currentPage, this.page.currtNum, this.startValue, this.endValue)
+    this.getlogservice.getLog(this.pageNum, this.pageSize, this.startValue, this.endValue)
       .subscribe(res => {
         // 获取数据
-        this.records = res.rows;
+        this.Pages(res);
       });
   }
 
   // 查询按钮
   select() {
     this.getdata();
+  }
+
+  Pages(res) {
+    this.pageNum = res.pageNum;
+    this.pageSize = res.pageSize;
+    this.total = res.total;
+    this.records = res.rows;
   }
 }

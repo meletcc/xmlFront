@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FullbackServiceService} from '../../service/fullbackService/fullback-service.service';
-import {Page} from '../../entity/page';
+import {Fullback} from '../../entity/fullback';
 
 @Component({
   selector: 'app-full-back',
@@ -9,9 +9,13 @@ import {Page} from '../../entity/page';
 })
 export class FullBackComponent implements OnInit {
 
-  page: Page;
+  total: number;
 
-  records: Array<any>;
+  pageNum: number;
+
+  pageSize: number;
+
+  records: Array<Fullback>;
 
   startValue: Date;
 
@@ -60,23 +64,32 @@ export class FullBackComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.page = new Page();
+    this.pageSize = 10;
+    this.pageNum = 1;
     this.getdata();
   }
 
   getdata() {
-    this.fullbackservice.getLog(this.page.currentPage, this.page.currtNum, this.startValue, this.endValue)
+    // this.page.totleNum = res.total;
+    // this.page.pageCount = Math.ceil(res['total'] / this.page.currtNum);
+    // this.page.startNum = ((this.page.currentPage - 1) * this.page.currtNum) + 1;
+    // this.page.getCurrtNum = this.page.startNum - 1 + res.rows.length;
+    this.fullbackservice.getLog(this.pageNum, this.pageSize, this.startValue, this.endValue)
       .subscribe(res => {
-        this.records = res.rows;
-        // this.page.totleNum = res.total;
-        // this.page.pageCount = Math.ceil(res['total'] / this.page.currtNum);
-        // this.page.startNum = ((this.page.currentPage - 1) * this.page.currtNum) + 1;
-        // this.page.getCurrtNum = this.page.startNum - 1 + res.rows.length;
+        // 获取数据
+        this.Pages(res);
       });
   }
 
   select() {
     this.getdata();
+  }
+
+  Pages(res) {
+    this.pageNum = res.pageNum;
+    this.pageSize = res.pageSize;
+    this.total = res.total;
+    this.records = res.rows;
   }
 
   /**

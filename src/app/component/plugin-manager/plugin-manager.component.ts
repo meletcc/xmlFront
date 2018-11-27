@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Page} from '../../entity/page';
 import {GetPluginService} from '../../service/getplugin/get-plugin.service';
 import {DelService} from '../../service/delService/del.service';
 import {HttpClient, HttpEvent, HttpEventType, HttpHeaders, HttpRequest, HttpResponse} from '@angular/common/http';
-import {NzMessageService, UploadFile, UploadFilter, UploadXHRArgs} from 'ng-zorro-antd';
+import {NzMessageService, UploadXHRArgs} from 'ng-zorro-antd';
 import {Response} from '../../entity/Response';
 
 @Component({
@@ -13,18 +12,20 @@ import {Response} from '../../entity/Response';
 })
 export class PluginManagerComponent implements OnInit {
 
-  headerUp: HttpHeaders = new HttpHeaders({
-    'Authorization': 'my-auth-token',
-    'enctype': 'multipart/form-data'
-  });
-
   total: number;
+
   pageNum: number;
+
   pageSize: number;
 
   records: Array<Plugin>;
 
   plugin: Plugin;
+
+  headerUp: HttpHeaders = new HttpHeaders({
+    'Authorization': 'my-auth-token',
+    'enctype': 'multipart/form-data'
+  });
 
   customReq = (item: UploadXHRArgs) => {
     // 构建一个 FormData 对象，用于存储文件或其他参数
@@ -71,24 +72,10 @@ export class PluginManagerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.pageSize = 1;
+    this.pageSize = 10;
     this.pageNum = 1;
     this.getdata();
   }
-
-  //上传文件
-  // upload(files): any {
-  //   this.plugin = null;
-  //   const formData = new FormData();
-  //   formData.append('opm', files.files[0]);
-  //   return this.client.post<any>('/plugin/anaOpm', formData, {headers: this.headerUp}).toPromise().then((response) => {
-  //     if (response.code === -1) {
-  //       alert(response.msg);
-  //     } else {
-  //       alert('上传插件成功');
-  //     }
-  //   });
-  // }
 
   /**
    *  跳转插件使用界面
@@ -118,11 +105,11 @@ export class PluginManagerComponent implements OnInit {
    * 获取插件实体数据
    */
   getdata() {
-    this.getplugin.getPlugin(this.pageNum, this.pageSize).subscribe(res => {
-      // 获取数据
-      this.Pages(res);
-
-    });
+    this.getplugin.getPlugin(this.pageNum, this.pageSize)
+      .subscribe(res => {
+        // 获取数据
+        this.Pages(res);
+      });
   }
 
   // 查询按钮

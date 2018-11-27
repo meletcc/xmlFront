@@ -24,8 +24,10 @@
 </div>
 <br>
 
-<nz-table #basicTable [nzData]="records" [nzPageIndex]="1" [nzPageSize]="10" [nzScroll] [nzShowQuickJumper]="true"
-          [nzShowSizeChanger]="true" [nzBordered]="true">
+<nz-table #basicTable [nzData]="records" [(nzPageIndex)]=this.pageNum [(nzPageSize)]=this.pageSize
+          [(nzTotal)]=this.total [nzScroll] [nzShowQuickJumper]="true"
+          [nzShowSizeChanger]="true" [nzBordered]="true" [nzFrontPagination]="false" (nzPageIndexChange)="getdata()"
+          (nzPageSizeChange)="getdata()">
   <thead>
   <tr>
     <th>编号</th>

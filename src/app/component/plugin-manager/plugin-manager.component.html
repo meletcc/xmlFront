@@ -38,9 +38,9 @@
     <td>{{item.pluginName}}</td>
     <td>{{item.pluginDescription}}</td>
     <td>
-      <a href="#" routerLink="/plugin" (click)="toUsePluginPage(item)">执行</a>
+      <a href="javascript:void(0);" routerLink="/plugin" (click)="toUsePluginPage(item)">执行</a>
       <nz-divider nzType="vertical"></nz-divider>
-      <a href="javascript:void(0);" (click)="del(item.pluginId,i)">删除</a>
+      <a href="javascript:void(0);" (click)="del(item.pluginId, i)">删除</a>
     </td>
   </tr>
   </tbody>
