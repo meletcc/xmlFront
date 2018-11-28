@@ -137,7 +137,7 @@ export class ContactListComponent implements OnInit {
       const link = document.createElement('a');
       const blob = new Blob([data], {type: 'application/text'});
       link.setAttribute('href', window.URL.createObjectURL(blob));
-      link.setAttribute('download', this.plugin.pluginDescription + '.opm');
+      link.setAttribute('download', this.plugin.pluginName + '.opm');
       link.style.visibility = 'hidden';
       document.body.appendChild(link);
       link.click();

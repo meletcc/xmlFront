@@ -4,6 +4,7 @@ import {DelService} from '../../service/delService/del.service';
 import {HttpClient, HttpEvent, HttpEventType, HttpHeaders, HttpRequest, HttpResponse} from '@angular/common/http';
 import {NzMessageService, UploadXHRArgs} from 'ng-zorro-antd';
 import {Response} from '../../entity/Response';
+import {Plugin} from '../../entity/plugin';
 
 @Component({
   selector: 'app-plugin-manager',
@@ -122,5 +123,20 @@ export class PluginManagerComponent implements OnInit {
     this.pageSize = res.pageSize;
     this.total = res.total;
     this.records = res.rows;
+  }
+
+  // 下载插件
+  download(item: Plugin) {
+    this.client.post('/plugin/download', item, {responseType: 'blob'})
+      .subscribe(data => {
+        const link = document.createElement('a');
+        const blob = new Blob([data], {type: 'application/text'});
+        link.setAttribute('href', window.URL.createObjectURL(blob));
+        link.setAttribute('download', item.pluginName + '.opm');
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      });
   }
 }

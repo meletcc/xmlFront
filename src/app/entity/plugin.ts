@@ -1,5 +1,3 @@
-import {Parameters} from './Parameters';
-
 export class Plugin {
   /**
    * 插件id
