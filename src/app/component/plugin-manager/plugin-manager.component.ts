@@ -18,7 +18,7 @@ export class PluginManagerComponent implements OnInit {
 
   pageSize: number;
 
-  records: Array<Plugin>;
+  records: Array<Plugin> = [];
 
   plugin: Plugin;
 

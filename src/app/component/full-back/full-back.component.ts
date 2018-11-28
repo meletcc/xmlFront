@@ -15,7 +15,7 @@ export class FullBackComponent implements OnInit {
 
   pageSize: number;
 
-  records: Array<Fullback>;
+  records: Array<Fullback> = [];
 
   startValue: Date;
 

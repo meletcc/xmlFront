@@ -24,7 +24,7 @@
 </div>
 <br>
 
-<nz-table #basicTable [nzData]="records" [(nzPageIndex)]=this.pageNum [(nzPageSize)]=this.pageSize
+<nz-table #basicTable [(nzData)]=this.records [(nzPageIndex)]=this.pageNum [(nzPageSize)]=this.pageSize
           [(nzTotal)]=this.total [nzScroll] [nzShowQuickJumper]="true"
           [nzShowSizeChanger]="true" [nzBordered]="true" [nzFrontPagination]="false" (nzPageIndexChange)="getdata()"
           (nzPageSizeChange)="getdata()">

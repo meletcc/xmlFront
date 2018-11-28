@@ -16,7 +16,7 @@ export class LogComponent implements OnInit {
 
   pageSize: number;
 
-  records: Array<Records>; // 日志记录，对象集合
+  records: Array<Records> = []; // 日志记录，对象集合
 
   startValue: Date; // 开始时间
 
